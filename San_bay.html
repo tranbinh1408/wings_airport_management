@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vietnam Airlines</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    /* styles.css */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #f1f1f1;
+}
+
+.logo img {
+    width: 150px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+.hero {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+.hero img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+}
+
+.hero-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.hero-text h1 {
+    font-size: 3em;
+}
+
+.hero-text h2 {
+    font-size: 2em;
+}
+
+.hero-text p {
+    font-size: 1.5em;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    background-color: #0044cc;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0033aa;
+}
+
+</style>
+<body>
+    <header>
+        <div class="logo">
+            <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pinterest.ca%2Fpin%2F665477282435639412%2F&psig=AOvVaw05KO5NzueSgHVhxitaSWjv&ust=1716461606835000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCPjC7PiLoYYDFQAAAAAdAAAAABAE" alt="Vietnam Airlines Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">TRỢ GIÚP</a></li>
+                <li><a href="#">ĐĂNG NHẬP</a></li>
+                <li><a href="#">ĐĂNG KÝ</a></li>
+                <li><a href="#">VIETNAM - TIẾNG VIỆT</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="hero">
+            <img src="https://i.pinimg.com/736x/51/d6/a4/51d6a4dd2a22b6afec208048e2f0ff30.jpg" alt="Perth Skyline">
+            <div class="hero-text">
+                <h1>CHẠM TỚI GIẤC MƠ</h1>
+                <h2>PERTH | BOORLOO</h2>
+                <p>Giá vé ưu đãi chỉ từ 12.900.000 VND</p>
+                <button class="buy-ticket">Mua Vé</button>
+                <button class="manage-booking">Quản Lý Đặt Chỗ</button>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
