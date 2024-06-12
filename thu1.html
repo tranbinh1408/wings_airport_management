@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pictures Slideshow</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <style>
+    .slider-container {
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .slider {
+      display: flex;
+      transition: transform 1s ease;
+    }
+
+    .slide {
+      position: relative;
+      width: 30%; /* Adjust width as needed */
+      margin: 10px;
+      box-sizing: border-box;
+    }
+
+    .slide img {
+      width: 100%;
+      height: auto;
+    }
+
+    .text {
+      text-align: center;
+      background-color: #f0f0f0; /* Change this to your preferred background color */
+      padding: 10px;
+      font-family: Arial, sans-serif; /* Change this to your preferred font */
+      font-size: 16px;
+    }
+
+    .dots {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: #bbb;
+      margin: 0 5px;
+      cursor: pointer;
+    }
+
+    .dot.active {
+      background-color: #717171;
+    }
+  </style>
+</head>
+<body>
+
+  <h2 class="w3-center">Slideshow Hình Ảnh</h2>
+
+  <div class="slider-container">
+    <div class="slider">
+      <div class="slide">
+        <img src="image9.png" alt="Image 1">
+        <div class="text">Hạng Thương Gia 1</div>
+      </div>
+      <div class="slide">
+        <img src="image10.png" alt="Image 2">
+        <div class="text">Hạng Thương Gia 2</div>
+      </div>
+      <div class="slide">
+        <img src="image11.png" alt="Image 3">
+        <div class="text">Hạng Thương Gia 3</div>
+      </div>
+      <div class="slide">
+        <img src="image12.png" alt="Image 4">
+        <div class="text">Hạng Thương Gia 4</div>
+      </div>
+      <div class="slide">
+        <img src="image13.png" alt="Image 5">
+        <div class="text">Hạng Thương Gia 5</div>
+      </div>
+      <div class="slide">
+        <img src="image14.png" alt="Image 6">
+        <div class="text">Hạng Thương Gia 6</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dots"></div>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    const slider = document.querySelector('.slider');
+    const dotsContainer = document.querySelector('.dots');
+    let currentSlide = 0;
+    const slidesPerPage = 3;
+
+    // Create dots dynamically
+    const numDots = Math.ceil(slides.length / slidesPerPage);
+    for (let i = 0; i < numDots; i++) {
+      const dot = document.createElement('span');
+      dot.classList.add('dot');
+      if (i === 0) {
+        dot.classList.add('active');
+      }
+      dotsContainer.appendChild(dot);
+    }
+
+    const dots = document.querySelectorAll('.dot');
+
+    function showSlide(n) {
+      const slideWidth = slides[0].offsetWidth + 20; // Including margin
+      slider.style.transform = `translateX(${-n * slideWidth * slidesPerPage}px)`;
+      dots.forEach((dot, index) => {
+        dot.classList.remove('active');
+        if (index === Math.floor(n / slidesPerPage)) {
+          dot.classList.add('active');
+        }
+      });
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % numDots;
+      showSlide(currentSlide);
+    }
+
+    showSlide(currentSlide);
+
+    const slideInterval = setInterval(nextSlide, 5000);
+
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        clearInterval(slideInterval); // Clear interval to stop auto-slide
+        currentSlide = index;
+        showSlide(currentSlide);
+      });
+    });
+  </script>
+</body>
+</html>

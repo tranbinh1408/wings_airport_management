@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>wings_airport_management</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <style>
     /* styles.css */
@@ -19,26 +20,29 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    background-color: #f1f1f1;
+    background-color: #0c7de6;
 }
 
 .logo img {
-    width: 150px;
+    width: 500px;
 }
 
 nav ul {
     list-style: none;
     display: flex;
     gap: 20px;
+    
 }
 
 nav ul li {
     display: inline;
+   
 }
 
 nav ul li a {
     text-decoration: none;
-    color: #333;
+    color: #fafbfd;
+    
 }
 
 .hero {
@@ -317,6 +321,54 @@ button:hover {
             display: inline-block;
             padding: 0 10px;
         }
+        .slider-container {
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .slider {
+      display: flex;
+      transition: transform 1s ease;
+    }
+
+    .slide {
+      position: relative;
+      width: 30%; /* Adjust width as needed */
+      margin: 10px;
+      box-sizing: border-box;
+    }
+
+    .slide img {
+      width: 100%;
+      height: auto;
+    }
+
+    .text {
+      text-align: center;
+      background-color: #f0f0f0; /* Change this to your preferred background color */
+      padding: 10px;
+      font-family: Arial, sans-serif; /* Change this to your preferred font */
+      font-size: 16px;
+    }
+
+    .dots {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: #bbb;
+      margin: 0 5px;
+      cursor: pointer;
+    }
+
+    .dot.active {
+      background-color: #717171;
+    }
 </style>
 <body>
     <header>
@@ -335,9 +387,9 @@ button:hover {
     <main>
         <section class="hero">
             <div class="w3-content w3-section" style="max-width:100%">
-                <img class="mySlides" src="https://i.pinimg.com/736x/51/d6/a4/51d6a4dd2a22b6afec208048e2f0ff30.jpg" style="width:100%">
-                <img class="mySlides" src="https://img.pikbest.com/ai/illus_our/20230427/1a770b5add9fc4dc5910b58dd69b997a.jpg!w700wp" style="width:100%">
-                <img class="mySlides" src="https://i.pinimg.com/736x/24/a5/c6/24a5c6b6963b20159170a389ebca846e.jpg" style="width:100%">
+                <img class="mySlides w3-animate-fading" src="https://i.pinimg.com/736x/51/d6/a4/51d6a4dd2a22b6afec208048e2f0ff30.jpg" style="width:100%">
+                <img class="mySlides w3-animate-fading" src="https://img.pikbest.com/ai/illus_our/20230427/1a770b5add9fc4dc5910b58dd69b997a.jpg!w700wp" style="width:100%">
+                <img class="mySlides w3-animate-fading" src="https://i.pinimg.com/736x/24/a5/c6/24a5c6b6963b20159170a389ebca846e.jpg" style="width:100%">
             </div>
             <div class="hero-text">
                 <h1>CHẠM TỚI GIẤC MƠ</h1>
@@ -534,9 +586,88 @@ button:hover {
             }
         }
     </script>
-     <br><div class="dropdown-note" style="text-align: center; font-size: 10px;">*Giá vé hiển thị được thu thập trong vòng 48 giờ và có thể không còn hiệu lực tại thời điểm đặt chỗ. Chúng tôi có thể thu thêm phí và lệ phí cho một số sản phẩm và dịch vụ.</div>
+     <br><div class="dropdown-note" style="text-align: center; font-size: 11px;">*Giá vé hiển thị được thu thập trong vòng 48 giờ và có thể không còn hiệu lực tại thời điểm đặt chỗ. Chúng tôi có thể thu thêm phí và lệ phí cho một số sản phẩm và dịch vụ.</div>
      <div class="section-title">
         <span>Thông tin nổi bật</span>
     </div>
+    <div class="slider-container">
+        <div class="slider">
+          <div class="slide">
+            <img src="image9.png" alt="Image 1">
+            <div class="text">Hạng Thương Gia 1</div>
+          </div>
+          <div class="slide">
+            <img src="image10.png" alt="Image 2">
+            <div class="text">Hạng Thương Gia 2</div>
+          </div>
+          <div class="slide">
+            <img src="image11.png" alt="Image 3">
+            <div class="text">Hạng Thương Gia 3</div>
+          </div>
+          <div class="slide">
+            <img src="image12.png" alt="Image 4">
+            <div class="text">Hạng Thương Gia 4</div>
+          </div>
+          <div class="slide">
+            <img src="image13.png" alt="Image 5">
+            <div class="text">Hạng Thương Gia 5</div>
+          </div>
+          <div class="slide">
+            <img src="image14.png" alt="Image 6">
+            <div class="text">Hạng Thương Gia 6</div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="dots"></div>
+    
+      <script>
+        const slides = document.querySelectorAll('.slide');
+        const slider = document.querySelector('.slider');
+        const dotsContainer = document.querySelector('.dots');
+        let currentSlide = 0;
+        const slidesPerPage = 3;
+    
+        // Create dots dynamically
+        const numDots = Math.ceil(slides.length / slidesPerPage);
+        for (let i = 0; i < numDots; i++) {
+          const dot = document.createElement('span');
+          dot.classList.add('dot');
+          if (i === 0) {
+            dot.classList.add('active');
+          }
+          dotsContainer.appendChild(dot);
+        }
+    
+        const dots = document.querySelectorAll('.dot');
+    
+        function showSlide(n) {
+          const slideWidth = slides[0].offsetWidth + 20; // Including margin
+          slider.style.transform = `translateX(${-n * slideWidth * slidesPerPage}px)`;
+          dots.forEach((dot, index) => {
+            dot.classList.remove('active');
+            if (index === Math.floor(n / slidesPerPage)) {
+              dot.classList.add('active');
+            }
+          });
+        }
+    
+        function nextSlide() {
+          currentSlide = (currentSlide + 1) % numDots;
+          showSlide(currentSlide);
+        }
+    
+        showSlide(currentSlide);
+    
+        const slideInterval = setInterval(nextSlide, 5000);
+    
+        dots.forEach((dot, index) => {
+          dot.addEventListener('click', () => {
+            clearInterval(slideInterval); // Clear interval to stop auto-slide
+            currentSlide = index;
+            showSlide(currentSlide);
+          });
+        });
+      </script>
 </body>
 </html>
