@@ -215,6 +215,108 @@ button:hover {
         .dropdown-content a:hover {
             background-color: #f1f1f1;
         }
+        .image-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+    
+        .row {
+            display: flex;
+            justify-content: center;
+        }
+    
+        .row img {
+            max-width: 200px;
+            height: auto;
+            margin: 10px;
+            cursor: pointer;
+        }
+        .dropdown > a::after {
+            content: 'v';
+            font-size: 0.8em;
+            margin-left: 5px;
+
+        }
+        .image-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .row {
+        display: flex;
+        justify-content: center;
+    }
+
+    .row img {
+        max-width: 200px;
+        height: auto;
+        margin: 10px;
+        cursor: pointer;
+    }
+
+    #image-overlay {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.9);
+    }
+
+    #close-button {
+        color: white;
+        font-size: 28px;
+        font-weight: bold;
+        position: absolute;
+        top: 10px;
+        right: 25px;
+        cursor: pointer;
+    }
+    #view-more-btn {
+        display: block;
+        margin: 0 auto;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        text-align: center;
+        text-decoration: none;
+        background-color: #ffffff;
+        color: #4a90e2;
+        border: 2px solid #4a90e2;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    #view-more-btn:hover {
+        background-color: #4a90e2;
+        color: #ffffff;
+    }
+    .section-title {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            font-size: 24px;
+            color: #333;
+            margin: 20px 0;
+        }
+
+    .section-title::before,
+    .section-title::after {
+            content: "";
+            flex: 1;
+            border-bottom: 1px solid #aaa;
+            margin: 0 10px;
+        }
+
+    .section-title span {
+            display: inline-block;
+            padding: 0 10px;
+        }
 </style>
 <body>
     <header>
@@ -232,7 +334,6 @@ button:hover {
     </header>
     <main>
         <section class="hero">
-            <h2 class="w3-center">Automatic Slideshow</h2>
             <div class="w3-content w3-section" style="max-width:100%">
                 <img class="mySlides" src="https://i.pinimg.com/736x/51/d6/a4/51d6a4dd2a22b6afec208048e2f0ff30.jpg" style="width:100%">
                 <img class="mySlides" src="https://img.pikbest.com/ai/illus_our/20230427/1a770b5add9fc4dc5910b58dd69b997a.jpg!w700wp" style="width:100%">
@@ -242,8 +343,6 @@ button:hover {
                 <h1>CHẠM TỚI GIẤC MƠ</h1>
                 <h2>PERTH | BOORLOO</h2>
                 <p>Giá vé ưu đãi chỉ từ 12.900.000 VND</p>
-                <button class="buy-ticket">Mua Vé</button>
-                <button class="manage-booking">Quản Lý Đặt Chỗ</button>
             </div>
         </section>
 
@@ -334,32 +433,87 @@ button:hover {
     <h2>Khám phá các chuyến bay phổ biến của chúng tôi</h2>
 
     <div class="dropdown">
-        <a href="#" onclick="toggleDropdown(event)">Nhấn vào đây để hiển thị các lựa chọn</a>
-        <div class="dropdown-content" id="dropdownContent">
-            <a href="link1.html">Lựa chọn 1</a>
+        <a href="#" onclick="toggleDropdown(event, 'dropdownContent1')">Nhấn vào đây để hiển thị các lựa chọn</a>
+        <div class="dropdown-content" id="dropdownContent1">
+            <a href="image1.png">Lựa chọn 1</a>
             <a href="link2.html">Lựa chọn 2</a>
             <a href="link3.html">Lựa chọn 3</a>
         </div>
     </div>
     <div class="dropdown">
-        <a href="#" onclick="toggleDropdown(event)">Ngân sách</a>
-        <div class="dropdown-content" id="dropdownContent">
+        <a href="#" onclick="toggleDropdown(event, 'dropdownContent2')">Ngân sách</a>
+        <div class="dropdown-content" id="dropdownContent2">
             <a href="link1.html">Lựa chọn 4</a>
             <a href="link2.html">Lựa chọn 5</a>
             <a href="link3.html">Lựa chọn 6</a>
         </div>
     </div>
+    <div class="image-grid">
+        <div class="row">
+            <a href="#" onclick="showDropdown(event, 'dropdownContent1')"><img src="image1.png" alt="Image 1"></a>
+            <a href="#" onclick="showDropdown(event, 'dropdownContent1')"><img src="image2.png" alt="Image 2"></a>
+            <a href="#" onclick="showDropdown(event, 'dropdownContent1')"><img src="image3.png" alt="Image 3"></a>
+            <a href="#" onclick="showDropdown(event, 'dropdownContent1')"><img src="image4.png" alt="Image 4"></a>
+        </div>
+        <div class="row" id="additional-images" style="display: none;">
+            <a href="#" onclick="showDropdown(event, 'dropdownContent2')"><img src="image5.png" alt="Image 5"></a>
+            <a href="#" onclick="showDropdown(event, 'dropdownContent2')"><img src="image6.png" alt="Image 6"></a>
+            <a href="#" onclick="showDropdown(event, 'dropdownContent2')"><img src="image7.png" alt="Image 7"></a>
+            <a href="#" onclick="showDropdown(event, 'dropdownContent2')"><img src="image8.png" alt="Image 8"></a>
+        </div>
+    </div>
+    <button id="view-more-btn" onclick="showAdditionalImages()">Xem thêm</button>
+    
+    <div id="image-overlay">
+        <span id="close-button" onclick="closeOverlay()">&times;</span>
+        <div class="image-grid">
+            <div class="row">
+                <img id="image1" src="image1.jpg" alt="Image 1">
+                <img id="image2" src="image2.jpg" alt="Image 2">
+                <img id="image3" src="image3.jpg" alt="Image 3">
+                <img id="image4" src="image4.jpg" alt="Image 4">
+            </div>
+            <div class="row">
+                <img id="image5" src="image5.jpg" alt="Image 5">
+                <img id="image6" src="image6.jpg" alt="Image 6">
+                <img id="image7" src="image7.jpg" alt="Image 7">
+                <img id="image8" src="image8.jpg" alt="Image 8">
+            </div>
+        </div>
+    </div>
+    
     <script>
-        function toggleDropdown(event) {
+        function toggleDropdown(event, dropdownId) {
             event.preventDefault();
-            var dropdownContent = document.getElementById('dropdownContent');
+            var dropdownContent = document.getElementById(dropdownId);
             if (dropdownContent.style.display === 'block') {
                 dropdownContent.style.display = 'none';
             } else {
                 dropdownContent.style.display = 'block';
             }
         }
-
+    
+        function showDropdown(event, dropdownId) {
+            event.preventDefault();
+            toggleDropdown(event, dropdownId);
+        }
+    
+        function showAdditionalImages() {
+            var additionalImages = document.getElementById('additional-images');
+            if (additionalImages.style.display === 'none') {
+                additionalImages.style.display = 'flex';
+                document.getElementById('view-more-btn').innerText = 'Ẩn bớt';
+            } else {
+                additionalImages.style.display = 'none';
+                document.getElementById('view-more-btn').innerText = 'Xem thêm';
+            }
+        }
+    
+        function closeOverlay() {
+            var overlay = document.getElementById('image-overlay');
+            overlay.style.display = 'none';
+        }
+    
         // Đóng menu dropdown nếu người dùng nhấp vào bất kỳ đâu bên ngoài menu
         window.onclick = function(event) {
             if (!event.target.matches('.dropdown a')) {
@@ -372,7 +526,17 @@ button:hover {
                 }
             }
         }
-        
+    
+        window.onload = function() {
+            var links = document.getElementsByTagName('a');
+            for (var i = 0; i < links.length; i++) {
+                links[i].style.textDecoration = 'none';
+            }
+        }
     </script>
+     <br><div class="dropdown-note" style="text-align: center; font-size: 10px;">*Giá vé hiển thị được thu thập trong vòng 48 giờ và có thể không còn hiệu lực tại thời điểm đặt chỗ. Chúng tôi có thể thu thêm phí và lệ phí cho một số sản phẩm và dịch vụ.</div>
+     <div class="section-title">
+        <span>Thông tin nổi bật</span>
+    </div>
 </body>
 </html>
