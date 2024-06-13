@@ -1,143 +1,158 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Pictures Slideshow</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-  <style>
-    .slider-container {
-      overflow: hidden;
-      width: 66.67%; /* Set width to 2/3 of the screen */
-      margin: 0 auto; /* Center the slider */
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Booking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0;
+        }
 
-    .slider {
-      display: flex;
-      transition: transform 1s ease;
-      width: max-content; /* Ensure the slider container is only as wide as its content */
-    }
+        .navbar {
+            display: flex;
+            justify-content: space-around;
+            background-color: rgba(0, 120, 215, 0.5); /* Transparent blue */
+            padding: 14px;
+        }
 
-    .slide {
-      position: relative;
-      flex: 0 0 auto; /* Prevent shrinking */
-      margin: 10px;
-      box-sizing: border-box;
-    }
+        .navbar div {
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            color: white;
+        }
 
-    .slide img {
-      display: block;
-    }
+        .navbar div.active,
+        .navbar div:hover {
+            background-color: #0078d7; /* Darker blue when active or hovered */
+        }
 
-    .text {
-      text-align: center;
-      background-color: #f0f0f0; /* Change this to your preferred background color */
-      padding: 10px;
-      font-family: Arial, sans-serif; /* Change this to your preferred font */
-      font-size: 16px;
-    }
+        .container {
+            padding: 20px;
+            background-color: #fff;
+            max-width: 800px;
+            margin: 20px auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            display: none; /* Initially hidden */
+        }
 
-    .dots {
-      display: flex;
-      justify-content: center;
-      margin-top: 10px;
-    }
+        .container.active {
+            display: block; /* Show when active class is added */
+        }
 
-    .dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background-color: #bbb;
-      margin: 0 5px;
-      cursor: pointer;
-    }
+        .container h2 {
+            margin-top: 0;
+        }
 
-    .dot.active {
-      background-color: #717171;
-    }
-  </style>
+        .form-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group input {
+            width: calc(50% - 20px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .form-group button {
+            padding: 10px 20px;
+            background-color: #ffc107;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .form-group button:hover {
+            background-color: #e0a800;
+        }
+
+        .info-text {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .options {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .option {
+            text-align: center;
+            color: #ddd;
+        }
+    </style>
 </head>
 <body>
+    <div class="navbar">
+        <div onclick="showContainer('booking')">MUA VÉ</div>
+        <div onclick="showContainer('manage')">QUẢN LÝ ĐẶT CHỖ</div>
+        <div onclick="showContainer('checkin')">LÀM THỦ TỤC</div>
+    </div>
 
-  <h2 class="w3-center">Slideshow Hình Ảnh</h2>
-
-  <div class="slider-container">
-    <div class="slider">
-      <div class="slide">
-        <img src="image9.png" alt="Image 1">
-        <div class="text">Hạng Thương Gia 1</div>
-      </div>
-      <div class="slide">
-        <img src="image10.png" alt="Image 2">
-        <div class="text">Hạng Thương Gia 2</div>
-      </div>
-      <div class="slide">
-        <img src="image11.png" alt="Image 3">
-        <div class="text">Hạng Thương Gia 3</div>
-      </div>
-      <div class="slide">
-        <img src="image12.png" alt="Image 4">
-        <div class="text">Hạng Thương Gia 4</div>
-      </div>
-      <div class="slide">
-        <img src="image13.png" alt="Image 5">
-        <div class="text">Hạng Thương Gia 5</div>
-      </div>
-      <div class="slide">
-        <img src="image14.png" alt="Image 6">
-        <div class="text">Hạng Thương Gia 6</div>
+    <div class="container" id="booking-container">
+        <h2>Mua Vé</h2>
+        <div class="form-container">
+          <div class="form-group">
+              <label for="from">Từ</label>
+              <input type="text" id="from" placeholder="Hà Nội (HAN), Việt Nam">
+          </div>
+          <div class="form-group">
+              <label for="to">Đến</label>
+              <input type="text" id="to" placeholder="Bến">
+          </div>
+          <div class="form-group">
+              <label for="departure-date">Ngày đi</label>
+              <input type="date" id="departure-date">
+          </div>
+          <div class="form-group">
+              <label for="return-date">Ngày về</label>
+              <input type="date" id="return-date">
+          </div>
       </div>
     </div>
-  </div>
+  
+    <div class="container" id="manage-container">
+        <h2>Quản Lý Đặt Chỗ</h2>
+        <button style="background-color: rgb(104, 179, 230); padding:5px; margin-bottom: 10px">Mã đặt chỗ/Số vé điện tử</button>
+        <div class="form-group">
+            <input type="text" placeholder="Mã đặt chỗ/Số vé điện tử">
+            <input type="text" placeholder="Họ">
+        </div>
+        <div>
+          <button>TÌM KIẾM</button>
+        </div>
+    </div>
 
-  <div class="dots"></div>
+    <div class="container" id="checkin-container">
+        <h2>Làm Thủ Tục</h2>
+        <button>Mã đặt chỗ/Số vé điện tử</button>
+        <div class="form-group">
+            <input type="text" placeholder="Mã đặt chỗ/Số vé điện tử">
+            <input type="text" placeholder="Họ">
+            <button>TÌM KIẾM</button>
+        </div>
+    </div>
 
-  <script>
-    const slides = document.querySelectorAll('.slide');
-    const slider = document.querySelector('.slider');
-    const dotsContainer = document.querySelector('.dots');
-    let currentSlide = 0;
-    const slidesPerPage = 3;
+    <script>
+        function showContainer(containerId) {
+            // Hide all containers
+            document.getElementById('booking-container').classList.remove('active');
+            document.getElementById('manage-container').classList.remove('active');
+            document.getElementById('checkin-container').classList.remove('active');
 
-    // Create dots dynamically
-    const numDots = Math.ceil(slides.length / slidesPerPage);
-    for (let i = 0; i < numDots; i++) {
-      const dot = document.createElement('span');
-      dot.classList.add('dot');
-      if (i === 0) {
-        dot.classList.add('active');
-      }
-      dotsContainer.appendChild(dot);
-    }
-
-    const dots = document.querySelectorAll('.dot');
-
-    function showSlide(n) {
-      const slideWidth = slides[0].offsetWidth + 20; // Including margin
-      slider.style.transform = `translateX(${-n * slideWidth * slidesPerPage}px)`;
-      dots.forEach((dot, index) => {
-        dot.classList.remove('active');
-        if (index === n) {
-          dot.classList.add('active');
+            // Show the selected container
+            document.getElementById(`${containerId}-container`).classList.add('active');
         }
-      });
-    }
-
-    function nextSlide() {
-      currentSlide = (currentSlide + 1) % numDots;
-      showSlide(currentSlide);
-    }
-
-    showSlide(currentSlide);
-
-    const slideInterval = setInterval(nextSlide, 5000);
-
-    dots.forEach((dot, index) => {
-      dot.addEventListener('click', () => {
-        clearInterval(slideInterval); // Clear interval to stop auto-slide
-        currentSlide = index;
-        showSlide(currentSlide);
-      });
-    });
-  </script>
+    </script>
 </body>
 </html>

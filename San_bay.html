@@ -308,39 +308,40 @@ button:hover {
             color: #333;
             margin: 20px 0;
         }
-
-    .section-title::before,
-    .section-title::after {
+        .section-title::before,
+        .section-title::after {
             content: "";
             flex: 1;
             border-bottom: 1px solid #aaa;
             margin: 0 10px;
         }
 
-    .section-title span {
+        .section-title span {
             display: inline-block;
             padding: 0 10px;
         }
+
         .slider-container {
       overflow: hidden;
-      width: 100%;
+      width: 66.67%; /* Set width to 2/3 of the screen */
+      margin: 0 auto; /* Center the slider */
     }
 
     .slider {
       display: flex;
       transition: transform 1s ease;
+      width: max-content; /* Ensure the slider container is only as wide as its content */
     }
 
     .slide {
       position: relative;
-      width: 30%; /* Adjust width as needed */
+      flex: 0 0 auto; /* Prevent shrinking */
       margin: 10px;
       box-sizing: border-box;
     }
 
     .slide img {
-      width: 100%;
-      height: auto;
+      display: block;
     }
 
     .text {
@@ -374,6 +375,7 @@ button:hover {
     <header>
         <div class="logo">
             <img src="images/wings.png" alt="wings">
+            <p style="color: #f0f0f0;">wings_airport_management</p>
         </div>
         <nav>
             <ul>
@@ -622,52 +624,52 @@ button:hover {
       <div class="dots"></div>
     
       <script>
-        const slides = document.querySelectorAll('.slide');
-        const slider = document.querySelector('.slider');
-        const dotsContainer = document.querySelector('.dots');
-        let currentSlide = 0;
-        const slidesPerPage = 3;
-    
-        // Create dots dynamically
-        const numDots = Math.ceil(slides.length / slidesPerPage);
-        for (let i = 0; i < numDots; i++) {
-          const dot = document.createElement('span');
-          dot.classList.add('dot');
-          if (i === 0) {
-            dot.classList.add('active');
-          }
-          dotsContainer.appendChild(dot);
+    const slides = document.querySelectorAll('.slide');
+    const slider = document.querySelector('.slider');
+    const dotsContainer = document.querySelector('.dots');
+    let currentSlide = 0;
+    const slidesPerPage = 3;
+
+    // Create dots dynamically
+    const numDots = Math.ceil(slides.length / slidesPerPage);
+    for (let i = 0; i < numDots; i++) {
+      const dot = document.createElement('span');
+      dot.classList.add('dot');
+      if (i === 0) {
+        dot.classList.add('active');
+      }
+      dotsContainer.appendChild(dot);
+    }
+
+    const dots = document.querySelectorAll('.dot');
+
+    function showSlide(n) {
+      const slideWidth = slides[0].offsetWidth + 20; // Including margin
+      slider.style.transform = `translateX(${-n * slideWidth * slidesPerPage}px)`;
+      dots.forEach((dot, index) => {
+        dot.classList.remove('active');
+        if (index === n) {
+          dot.classList.add('active');
         }
-    
-        const dots = document.querySelectorAll('.dot');
-    
-        function showSlide(n) {
-          const slideWidth = slides[0].offsetWidth + 20; // Including margin
-          slider.style.transform = `translateX(${-n * slideWidth * slidesPerPage}px)`;
-          dots.forEach((dot, index) => {
-            dot.classList.remove('active');
-            if (index === Math.floor(n / slidesPerPage)) {
-              dot.classList.add('active');
-            }
-          });
-        }
-    
-        function nextSlide() {
-          currentSlide = (currentSlide + 1) % numDots;
-          showSlide(currentSlide);
-        }
-    
+      });
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % numDots;
+      showSlide(currentSlide);
+    }
+
+    showSlide(currentSlide);
+
+    const slideInterval = setInterval(nextSlide, 5000);
+
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        clearInterval(slideInterval); // Clear interval to stop auto-slide
+        currentSlide = index;
         showSlide(currentSlide);
-    
-        const slideInterval = setInterval(nextSlide, 5000);
-    
-        dots.forEach((dot, index) => {
-          dot.addEventListener('click', () => {
-            clearInterval(slideInterval); // Clear interval to stop auto-slide
-            currentSlide = index;
-            showSlide(currentSlide);
-          });
-        });
+      });
+    });
       </script>
 </body>
 </html>

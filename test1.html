@@ -3,28 +3,239 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Flight Booking</title>
     <style>
+        /* CSS styles for the main content */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0;
+        }
 
+        .navbar {
+            display: flex;
+            justify-content: space-around;
+            background-color: #0078d7;
+            padding: 14px;
+            color: white;
+        }
+
+        .navbar div {
+            cursor: pointer;
+        }
+
+        .container {
+            padding: 20px;
+            background-color: #fff;
+            max-width: 800px;
+            margin: 20px auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            display: none; /* Initially hidden */
+        }
+
+        .container.active {
+            display: block; /* Show when active class is added */
+        }
+
+        .container h2 {
+            margin-top: 0;
+        }
+
+        .form-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group input {
+            width: calc(50% - 20px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .form-group button {
+            padding: 10px 20px;
+            background-color: #ffc107;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .form-group button:hover {
+            background-color: #e0a800;
+        }
+
+        .info-text {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .options {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .option {
+            text-align: center;
+            color: #ddd;
+        }
+
+        .option img {
+            width: 50px;
+            height: 50px;
+        }
+
+        /* CSS styles for the small box section */
+        .small-box {
+            padding: 20px;
+            background-color: #fff;
+            max-width: 800px;
+            margin: 20px auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .box-content {
+            display: flex;
+            justify-content: center;
+        }
+
+        .booking-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .booking-table td {
+            padding: 10px;
+        }
+
+        .small-box-tab {
+            padding: 10px 20px;
+            background-color: #ffc107;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .small-box-tab:hover {
+            background-color: #e0a800;
+        }
+        .booking-management-form {
+    margin-bottom: 20px;
+}
+
+.booking-table-container {
+    overflow-x: auto;
+}
+
+.booking-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.booking-table th,
+.booking-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.booking-table th {
+    background-color: #f2f2f2;
+}
     </style>
 </head>
 <body>
-    <h1>Tiêu đề cấp 1</h1>
-    <h2>Tiêu đề cấp 2</h2>
-    <h3>Tiêu đề cấp 3</h3>
-    <p style="font-family: Arial; font-size: 20px"> Đoạn văn này với font Arial và cỡ chữ 20px.</p>
-    <p style="color:rgb(226, 11, 11)"> Đoạn văn bản màu đỏ</p>
-    <p style="color:blue; background-color: rgb(248, 204, 10);">Đoạn văn bản màu vàng và chữ xanh dương</p>
-    <p style="text-align: center;"> Đoạn văn căn giữa</p>
-    <a href="Đây là một liên kết">Đây là một liên kết</a>
-    <img src="https://via.placeholder.com/150" alt="Nam yêu Bình" width="150" height="150" >
-    <p>Đoạn văn bản với <br> ngắt dòng.</p>
-    <hr>
-    <pre>Đây là đoạn văn bản 
-giữ nguyên định dạng.
-    </pre>
-    <hr>
-    <p>Đoạn văn bản sau đường kẻ ngang.</p>
+    <div class="navbar">
+        <div onclick="showContainer('booking-container')">MUA VÉ</div>
+        <div onclick="showContainer('booking-management-container')">QUẢN LÝ ĐẶT CHỖ</div>
+        <div onclick="showContainer('check-in-container')">LÀM THỦ TỤC</div>
+    </div>
 
+    <div class="container" id="booking-container">
+        <section class="small-box">
+            <div class="box-content">
+                <table class="booking-table">
+                    <tr>
+                        <td>
+                            <div class="form-group">
+                                <label for="from">Từ</label>
+                                <input type="text" id="from" placeholder="Hà Nội (HAN), Việt Nam">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <label for="to">Đến</label>
+                                <input type="text" id="to" placeholder="Bến">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <label for="departure-date">Ngày đi</label>
+                                <input type="date" id="departure-date">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <label for="return-date">Ngày về</label>
+                                <input type="date" id="return-date">
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    <div class="container" id="booking-management-container">
+        <!-- Booking management content goes here -->
+    </div>
+
+    <div class="container" id="check-in-container">
+        <!-- Check-in content goes here -->
+    </div>
+    <div class="container" id="booking-management-container">
+        <h2>Quản lý đặt chỗ</h2>
+        <div class="booking-management-form">
+            <div class="form-group">
+                <input type="text" placeholder="Mã đặt chỗ/Số vé điện tử">
+                <input type="text" placeholder="Họ">
+                <button>TÌM KIẾM</button>
+            </div>
+        </div>
+        <div class="booking-table-container">
+            <table class="booking-table">
+                <thead>
+                    <tr>
+                        <th>Mã đặt chỗ/Số vé điện tử</th>
+                        <th>Họ</th>
+                        <th>Tên</th>
+                        <th>Chuyến bay</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Dữ liệu sẽ được thêm vào đây bằng JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function showContainer(containerId) {
+            var containers = document.getElementsByClassName('container');
+            for (var i = 0; i < containers.length; i++) {
+                containers[i].classList.remove('active');
+            }
+            var container = document.getElementById(containerId);
+            container.classList.add('active');
+        }
+    </script>
 </body>
 </html>
