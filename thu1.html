@@ -7,24 +7,25 @@
   <style>
     .slider-container {
       overflow: hidden;
-      width: 100%;
+      width: 66.67%; /* Set width to 2/3 of the screen */
+      margin: 0 auto; /* Center the slider */
     }
 
     .slider {
       display: flex;
       transition: transform 1s ease;
+      width: max-content; /* Ensure the slider container is only as wide as its content */
     }
 
     .slide {
       position: relative;
-      width: 30%; /* Adjust width as needed */
+      flex: 0 0 auto; /* Prevent shrinking */
       margin: 10px;
       box-sizing: border-box;
     }
 
     .slide img {
-      width: 100%;
-      height: auto;
+      display: block;
     }
 
     .text {
@@ -115,7 +116,7 @@
       slider.style.transform = `translateX(${-n * slideWidth * slidesPerPage}px)`;
       dots.forEach((dot, index) => {
         dot.classList.remove('active');
-        if (index === Math.floor(n / slidesPerPage)) {
+        if (index === n) {
           dot.classList.add('active');
         }
       });
