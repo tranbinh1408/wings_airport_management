@@ -1,246 +1,170 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flight Booking</title>
+    <title>Check-in Form</title>
     <style>
-        /* CSS styles for the main content */
         body {
             font-family: Arial, sans-serif;
-            background-color: #f8f8f8;
-            margin: 0;
-            padding: 0;
-        }
-
-        .navbar {
-            display: flex;
-            justify-content: space-around;
-            background-color: #0078d7;
-            padding: 14px;
-            color: white;
-        }
-
-        .navbar div {
-            cursor: pointer;
-        }
-
-        .container {
-            padding: 20px;
-            background-color: #fff;
-            max-width: 800px;
-            margin: 20px auto;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            display: none; /* Initially hidden */
-        }
-
-        .container.active {
-            display: block; /* Show when active class is added */
-        }
-
-        .container h2 {
-            margin-top: 0;
-        }
-
-        .form-group {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .form-group input {
-            width: calc(50% - 20px);
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        .form-group button {
-            padding: 10px 20px;
-            background-color: #ffc107;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .form-group button:hover {
-            background-color: #e0a800;
-        }
-
-        .info-text {
-            margin-top: 20px;
-            font-weight: bold;
-        }
-
-        .options {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
-
-        .option {
-            text-align: center;
-            color: #ddd;
-        }
-
-        .option img {
-            width: 50px;
-            height: 50px;
-        }
-
-        /* CSS styles for the small box section */
-        .small-box {
-            padding: 20px;
-            background-color: #fff;
-            max-width: 800px;
-            margin: 20px auto;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-        }
-
-        .box-content {
+            background-color: #f9f9f9;
             display: flex;
             justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
-
-        .booking-table {
-            width: 100%;
-            border-collapse: collapse;
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
         }
-
-        .booking-table td {
-            padding: 10px;
+        .form-container h2 {
+            margin-bottom: 20px;
+            font-size: 16px;
+            color: #333;
         }
-
-        .small-box-tab {
-            padding: 10px 20px;
-            background-color: #ffc107;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            width: 100%;
-        }
-
-        .small-box-tab:hover {
-            background-color: #e0a800;
-        }
-        .booking-management-form {
+        .form-container .tab {
+            display: flex;
+            justify-content: space-between;
             margin-bottom: 20px;
         }
-
-        .booking-table-container {
-            overflow-x: auto;
+        .form-container .tab button {
+            background-color: #f1f1f1;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            flex: 1;
         }
-
-        .booking-table {
-            width: 100%;
-            border-collapse: collapse;
+        .form-container .tab button.active {
+            background-color: #008080;
+            color: white;
         }
-
-        .booking-table th,
-        .booking-table td {
+        .form-container form {
+            display: flex;
+            flex-direction: column;
+        }
+        .form-container form input,
+        .form-container form select {
             padding: 10px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
         }
-
-        .booking-table th {
-            background-color: #f2f2f2;
+        .form-container form button {
+            background-color: #ffcc00;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+        .form-container h2 {
+            margin-bottom: 20px;
+            font-size: 16px;
+            color: #333;
+        }
+        .form-container .tab {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .form-container .tab button {
+            background-color: #f1f1f1;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            flex: 1;
+        }
+        .form-container .tab button.active {
+            background-color: #008080;
+            color: white;
+        }
+        .form-container form {
+            display: none;
+            flex-direction: column;
+        }
+        .form-container form.active {
+            display: flex;
+        }
+        .form-container form input,
+        .form-container form select {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .form-container form button {
+            background-color: #ffcc00;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
         }
     </style>
 </head>
 <body>
-    <div class="navbar">
-        <div onclick="showContainer('booking-container')">MUA VÉ</div>
-        <div onclick="showContainer('booking-management-container')">QUẢN LÝ ĐẶT CHỖ</div>
-        <div onclick="showContainer('check-in-container')">LÀM THỦ TỤC</div>
-    </div>
-
-    <div class="container" id="booking-container">
-        <section class="small-box">
-            <div class="box-content">
-                <table class="booking-table">
-                    <tr>
-                        <td><button class="small-box-tab">MUA VÉ</button></td>
-                        <td><button class="small-box-tab">QUẢN LÝ ĐẶT CHỖ</button></td>
-                        <td><button class="small-box-tab">LÀM THỦ TỤC</button></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="form-group">
-                                <label for="from">Từ</label>
-                                <input type="text" id="from" placeholder="Hà Nội (HAN), Việt Nam">
-                            </div>
-                        </td>
-                        <td>
-                            <div class="form-group">
-                                <label for="to">Đến</label>
-                                <input type="text" id="to" placeholder="Bến">
-                            </div>
-                        </td>
-                        <td>
-                            <div class="form-group">
-                                <label for="departure-date">Ngày đi</label>
-                                <input type="date" id="departure-date">
-                            </div>
-                        </td>
-                        <td>
-                            <div class="form-group">
-                                <label for="return-date">Ngày về</label>
-                                <input type="date" id="return-date">
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </section>
-    </div>
-
-    <div class="container" id="booking-management-container">
-        <!-- Booking management content goes here -->
-    </div>
-
-    <div class="container" id="check-in-container">
-        <!-- Check-in content goes here -->
+    <div class="form-container">
+        <h2>Quý khách có thể làm thủ tục trực tuyến từ 24 đến 01 tiếng trước chuyến bay</h2>
+        <div class="tab">
+            <button class="active" onclick="openForm('pnr')">Mã đặt chỗ (PNR)</button>
+            <button onclick="openForm('ticket')">Số vé điện tử</button>
+            <button onclick="openForm('ffp')">Số thẻ FFP</button>
+        </div>
+        <form id="pnr" class="active">
+            <input type="text" placeholder="Mã đặt chỗ (PNR)" required>
+            <input type="text" placeholder="Họ" required>
+            <button type="submit">Làm Thủ Tục</button>
+        </form>
+        <form id="ticket">
+            <input type="text" placeholder="Số vé điện tử" required>
+            <input type="text" placeholder="Họ" required>
+            <button type="submit">Làm Thủ Tục</button>
+        </form>
+        <form id="ffp">
+            <input type="text" placeholder="Số thẻ FFP" required>
+            <input type="text" placeholder="Họ" required>
+            <select required>
+                <option value="" disabled selected>Frequent Flyer Program(*)</option>
+                <option value="program1">Program 1</option>
+                <option value="program2">Program 2</option>
+                <option value="program3">Program 3</option>
+            </select>
+            <button type="submit">Làm Thủ Tục</button>
+        </form>
     </div>
 
     <script>
-        function showContainer(containerId) {
-            var containers = document.getElementsByClassName('container');
-            for (var i = 0; i < containers.length; i++) {
-                containers[i].classList.remove('active');
-            }
-            var container = document.getElementById(containerId);
-            container.classList.add('active');
+        function openForm(formId) {
+            // Remove the active class from all buttons
+            const tabs = document.querySelectorAll('.tab button');
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            // Hide all forms
+            const forms = document.querySelectorAll('.form-container form');
+            forms.forEach(form => form.classList.remove('active'));
+
+            // Add the active class to the selected button and form
+            document.querySelector(`.tab button[onclick="openForm('${formId}')"]`).classList.add('active');
+            document.getElementById(formId).classList.add('active');
         }
     </script>
-
-    <div class="container" id="booking-management-container">
-        <h2>Quản lý đặt chỗ</h2>
-        <div class="booking-management-form">
-            <div class="form-group">
-                <input type="text" placeholder="Mã đặt chỗ/Số vé điện tử">
-                <input type="text" placeholder="Họ">
-                <button>TÌM KIẾM</button>
-            </div>
-        </div>
-        <div class="booking-table-container">
-            <table class="booking-table">
-                <thead>
-                    <tr>
-                        <th>Mã đặt chỗ/Số vé điện tử</th>
-                        <th>Họ</th>
-                        <th>Tên</th>
-                        <th>Chuyến bay</th>
-                        <th>Hành động</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Dữ liệu sẽ được thêm vào đây bằng JavaScript -->
-                </tbody>
-            </table>
-          </div>
-        </div>
-        
+</body>
+</html>

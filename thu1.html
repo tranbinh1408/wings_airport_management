@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -50,29 +50,29 @@
         }
 
         .form-group {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             margin-bottom: 20px;
         }
 
-        .form-group input {
-            width: calc(50% - 20px);
+        .form-group input,
+        .form-group select,
+        .form-group button {
+            width: 100%;
             padding: 10px;
+            margin-top: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
+            box-sizing: border-box;
         }
 
         .form-group button {
-            padding: 10px 20px;
             background-color: #ffc107;
             border: none;
-            border-radius: 4px;
             cursor: pointer;
+            width: 150px;
         }
 
         .form-group button:hover {
-            background-color: #e0a800;
+            background-color: #ffc107;
         }
 
         .info-text {
@@ -80,16 +80,34 @@
             font-weight: bold;
         }
 
-        .options {
+        .tab {
             display: flex;
             justify-content: space-between;
-            margin-top: 20px;
+            margin-bottom: 20px;
         }
 
-        .option {
-            text-align: center;
-            color: #ddd;
+        .tab button {
+            background-color: #f1f1f1;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            flex: 1;
         }
+
+        .tab button.active {
+            background-color: #ffc107;
+            color: white;
+        }
+
+        .form-container form {
+            display: none;
+            flex-direction: column;
+        }
+
+        .form-container form.active {
+            display: flex;
+        }
+        
     </style>
 </head>
 <body>
@@ -100,50 +118,105 @@
     </div>
 
     <div class="container" id="booking-container">
-        <h2>Mua Vé</h2>
-        <div class="form-container">
-          <div class="form-group">
-              <label for="from">Từ</label>
-              <input type="text" id="from" placeholder="Hà Nội (HAN), Việt Nam">
-          </div>
-          <div class="form-group">
-              <label for="to">Đến</label>
-              <input type="text" id="to" placeholder="Bến">
-          </div>
-          <div class="form-group">
-              <label for="departure-date">Ngày đi</label>
-              <input type="date" id="departure-date">
-          </div>
-          <div class="form-group">
-              <label for="return-date">Ngày về</label>
-              <input type="date" id="return-date">
-          </div>
-      </div>
+        <div class="form-group">
+            <label for="from">Từ</label>
+            <input type="text" id="from" placeholder="Hà Nội (HAN), Việt Nam">
+        </div>
+        <div class="form-group">
+            <label for="to">Đến</label>
+            <input type="text" id="to" placeholder="Bến">
+        </div>
+        <div class="form-group">
+            <label for="departure-date">Ngày đi</label>
+            <input type="date" id="departure-date">
+        </div>
+        <div class="form-group">
+            <label for="return-date">Ngày về</label>
+            <input type="date" id="return-date">
+        </div>
+        <div class="form-group">
+            <button style="width: 150px;">TÌM KIẾM</button>
+        </div>
     </div>
   
     <div class="container" id="manage-container">
-        <h2>Quản Lý Đặt Chỗ</h2>
-        <button style="background-color: rgb(104, 179, 230); padding:5px; margin-bottom: 10px">Mã đặt chỗ/Số vé điện tử</button>
+        <button style="background-color: rgb(247, 248, 248); padding:5px; margin-bottom: 10px; border: 2px solid rgb(238, 195, 6); border-radius: 5px;">Mã đặt chỗ/Số vé điện tử</button>
         <div class="form-group">
             <input type="text" placeholder="Mã đặt chỗ/Số vé điện tử">
             <input type="text" placeholder="Họ">
         </div>
-        <div>
-          <button>TÌM KIẾM</button>
+        <div class="form-group">
+            <button style="width: 150px;">TÌM KIẾM</button>
         </div>
     </div>
 
     <div class="container" id="checkin-container">
-        <h2>Làm Thủ Tục</h2>
-        <button>Mã đặt chỗ/Số vé điện tử</button>
-        <div class="form-group">
-            <input type="text" placeholder="Mã đặt chỗ/Số vé điện tử">
-            <input type="text" placeholder="Họ">
-            <button>TÌM KIẾM</button>
+        <div class="form-container">
+            <h2>Quý khách có thể làm thủ tục trực tuyến từ 24 đến 01 tiếng trước chuyến bay</h2>
+            <div class="tab">
+                <button class="active" onclick="openForm('pnr')">Mã đặt chỗ (PNR)</button>
+                <button onclick="openForm('ticket')">Số vé điện tử</button>
+                <button onclick="openForm('ffp')">Số thẻ FFP</button>
+            </div>
+            <form id="pnr" class="active">
+                <div class="form-group">
+                    <input type="text" placeholder="Mã đặt chỗ (PNR)" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Họ" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit" >Làm Thủ Tục</button>
+                </div>
+            </form>
+            <form id="ticket">
+                <div class="form-group">
+                    <input type="text" placeholder="Số vé điện tử" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Họ" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Làm Thủ Tục</button>
+                </div>
+            </form>
+            <form id="ffp">
+                <div class="form-group">
+                    <input type="text" placeholder="Số thẻ FFP" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Họ" required>
+                </div>
+                <div class="form-group">
+                    <select required>
+                        <option value="" disabled selected>Frequent Flyer Program(*)</option>
+                        <option value="program1">Program 1</option>
+                        <option value="program2">Program 2</option>
+                        <option value="program3">Program 3</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button type="submit" style="width: 150px">Làm Thủ Tục</button>
+                </div>
+            </form>
         </div>
     </div>
 
     <script>
+        function openForm(formId) {
+            // Remove the active class from all buttons
+            const tabs = document.querySelectorAll('.tab button');
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            // Hide all forms
+            const forms = document.querySelectorAll('.form-container form');
+            forms.forEach(form => form.classList.remove('active'));
+
+            // Add the active class to the selected button and form
+            document.querySelector(`.tab button[onclick="openForm('${formId}')"]`).classList.add('active');
+            document.getElementById(formId).classList.add('active');
+        }
+
         function showContainer(containerId) {
             // Hide all containers
             document.getElementById('booking-container').classList.remove('active');
