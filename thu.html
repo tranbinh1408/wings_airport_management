@@ -1,170 +1,147 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Check-in Form</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .form-container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 400px;
-        }
-        .form-container h2 {
-            margin-bottom: 20px;
-            font-size: 16px;
-            color: #333;
-        }
-        .form-container .tab {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-        .form-container .tab button {
-            background-color: #f1f1f1;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            flex: 1;
-        }
-        .form-container .tab button.active {
-            background-color: #008080;
-            color: white;
-        }
-        .form-container form {
-            display: flex;
-            flex-direction: column;
-        }
-        .form-container form input,
-        .form-container form select {
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        .form-container form button {
-            background-color: #ffcc00;
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .form-container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 400px;
-        }
-        .form-container h2 {
-            margin-bottom: 20px;
-            font-size: 16px;
-            color: #333;
-        }
-        .form-container .tab {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-        .form-container .tab button {
-            background-color: #f1f1f1;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            flex: 1;
-        }
-        .form-container .tab button.active {
-            background-color: #008080;
-            color: white;
-        }
-        .form-container form {
-            display: none;
-            flex-direction: column;
-        }
-        .form-container form.active {
-            display: flex;
-        }
-        .form-container form input,
-        .form-container form select {
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        .form-container form button {
-            background-color: #ffcc00;
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pictures Slideshow</title>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<style>
+.slider-container {
+    overflow: hidden;
+    width: 66.67%; /* Set width to 2/3 of the screen */
+    margin: 0 auto; /* Center the slider */
+}
+
+.slider {
+    display: flex;
+    transition: transform 1s ease;
+    width: max-content; /* Ensure the slider container is only as wide as its content */
+}
+
+.slide {
+    position: relative;
+    flex: 0 0 auto; /* Prevent shrinking */
+    margin: 10px;
+    box-sizing: border-box;
+}
+
+.slide img {
+    display: block;
+    width: 300px; /* Set a fixed width for the images */
+    height: 200px; /* Set a fixed height for the images */
+    object-fit: cover; /* Ensure images cover the container without stretching */
+}
+
+.text {
+    text-align: center;
+    background-color: #f0f0f0; /* Change this to your preferred background color */
+    padding: 10px;
+    font-family: Arial, sans-serif; /* Change this to your preferred font */
+    font-size: 16px;
+}
+
+.dots1 {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #bbb;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.dot.active {
+    background-color: #717171;
+}
+</style>
 </head>
 <body>
-    <div class="form-container">
-        <h2>Quý khách có thể làm thủ tục trực tuyến từ 24 đến 01 tiếng trước chuyến bay</h2>
-        <div class="tab">
-            <button class="active" onclick="openForm('pnr')">Mã đặt chỗ (PNR)</button>
-            <button onclick="openForm('ticket')">Số vé điện tử</button>
-            <button onclick="openForm('ffp')">Số thẻ FFP</button>
+
+    <h2 class="w3-center">Slideshow Hình Ảnh</h2>
+
+    <div class="slider-container">
+        <div class="slider">
+            <div class="slide">
+                <img src="images/image9.png" alt="Image 1">
+                <div class="text">Hạng Thương Gia 1</div>
+            </div>
+            <div class="slide">
+                <img src="images/image10.png" alt="Image 2">
+                <div class="text">Hạng Thương Gia 2</div>
+            </div>
+            <div class="slide">
+                <img src="images/image11.png" alt="Image 3">
+                <div class="text">Hạng Thương Gia 3</div>
+            </div>
+            <div class="slide">
+                <img src="images/image12.png" alt="Image 4">
+                <div class="text">Hạng Thương Gia 4</div>
+            </div>
+            <div class="slide">
+                <img src="images/image13.png" alt="Image 5">
+                <div class="text">Hạng Thương Gia 5</div>
+            </div>
+            <div class="slide">
+                <img src="images/image14.png" alt="Image 6">
+                <div class="text">Hạng Thương Gia 6</div>
+            </div>
         </div>
-        <form id="pnr" class="active">
-            <input type="text" placeholder="Mã đặt chỗ (PNR)" required>
-            <input type="text" placeholder="Họ" required>
-            <button type="submit">Làm Thủ Tục</button>
-        </form>
-        <form id="ticket">
-            <input type="text" placeholder="Số vé điện tử" required>
-            <input type="text" placeholder="Họ" required>
-            <button type="submit">Làm Thủ Tục</button>
-        </form>
-        <form id="ffp">
-            <input type="text" placeholder="Số thẻ FFP" required>
-            <input type="text" placeholder="Họ" required>
-            <select required>
-                <option value="" disabled selected>Frequent Flyer Program(*)</option>
-                <option value="program1">Program 1</option>
-                <option value="program2">Program 2</option>
-                <option value="program3">Program 3</option>
-            </select>
-            <button type="submit">Làm Thủ Tục</button>
-        </form>
     </div>
 
+    <div class="dots1"></div>
+
     <script>
-        function openForm(formId) {
-            // Remove the active class from all buttons
-            const tabs = document.querySelectorAll('.tab button');
-            tabs.forEach(tab => tab.classList.remove('active'));
+        const slides1 = document.querySelectorAll('.slide');
+        const slider = document.querySelector('.slider');
+        const dotsContainer1 = document.querySelector('.dots1');
+        let currentSlide = 0;
+        const slidesPerPage = 3;
 
-            // Hide all forms
-            const forms = document.querySelectorAll('.form-container form');
-            forms.forEach(form => form.classList.remove('active'));
-
-            // Add the active class to the selected button and form
-            document.querySelector(`.tab button[onclick="openForm('${formId}')"]`).classList.add('active');
-            document.getElementById(formId).classList.add('active');
+        // Create dots dynamically
+        const numDots = Math.ceil(slides1.length / slidesPerPage);
+        for (let i = 0; i < numDots; i++) {
+            const dot = document.createElement('span');
+            dot.classList.add('dot');
+            if (i === 0) {
+                dot.classList.add('active');
+            }
+            dotsContainer1.appendChild(dot);
         }
+
+        const dots1 = document.querySelectorAll('.dot');
+
+        function showSlide(n) {
+            const slideWidth = slides1[0].offsetWidth + 20; // Including margin
+            slider.style.transform = `translateX(${-n * slideWidth * slidesPerPage}px)`;
+            dots1.forEach((dot, index) => {
+                dot.classList.remove('active');
+                if (index === n) {
+                    dot.classList.add('active');
+                }
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % numDots;
+            showSlide(currentSlide);
+        }
+
+        showSlide(currentSlide);
+
+        const slideInterval = setInterval(nextSlide, 5000);
+
+        dots1.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                clearInterval(slideInterval); // Clear interval to stop auto-slide
+                currentSlide = index;
+                showSlide(currentSlide);
+            });
+        });
     </script>
 </body>
 </html>
