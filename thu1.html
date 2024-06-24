@@ -3,126 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flight Booking</title>
+    <title>Hệ thống Đặt vé Máy bay</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f8f8f8;
             margin: 0;
             padding: 0;
         }
-
         .navbar {
-            display: flex;
-            justify-content: space-around;
-            background-color: rgba(0, 120, 215, 0.5); /* Transparent blue */
-            padding: 14px;
-        }
-
-        .navbar div {
-            padding: 10px 20px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            color: white;
-        }
-
-        .navbar div.active,
-        .navbar div:hover {
-            background-color: #0078d7; /* Darker blue when active or hovered */
-        }
-
-        .container {
-            padding: 20px; /* Adjusted padding to align with table */
-            background-color: #fff;
-            max-width: 1000px;
-            margin: 20px auto;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            display: none; /* Initially hidden */
-        }
-
-        .container.active {
-            display: block; /* Show when active class is added */
-        }
-
-        .container h2 {
-            margin-top: 0;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group button {
-            width: 100%;
-            padding: 10px;
-            margin-top: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-
-        .form-group button {
-            background-color: #ffc107;
-            border: none;
-            cursor: pointer;
-            width: 150px;
-        }
-
-        .form-group button:hover {
-            background-color: #ffc107;
-        }
-
-        .info-text {
-            margin-top: 20px;
-            font-weight: bold;
-        }
-
-        .tab {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-
-        .tab button {
             background-color: #f1f1f1;
-            border: none;
-            padding: 10px 20px;
+            overflow: hidden;
+        }
+        .navbar div {
+            float: left;
+            display: block;
+            color: black;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
             cursor: pointer;
-            flex: 1;
         }
-
-        .tab button.active {
-            background-color: #ffc107;
-            color: white;
+        .navbar div:hover {
+            background-color: #ddd;
         }
-
-        .form-container form {
+        .overlay {
             display: none;
-            flex-direction: column;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 100;
         }
-
-        .form-container form.active {
-            display: flex;
+        .container {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            z-index: 101;
+            max-width: 80%;
+            max-height: 80%;
+            overflow-y: auto;
         }
-        
-        table {
-            width: 100%; /* Ensure the table takes full width */
-            border-collapse: collapse;
-            margin-top: 20px;
+        .form-group {
+            margin-bottom: 15px;
         }
-
-        table, th, td {
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"], input[type="tel"], input[type="date"] {
+            width: 100%;
+            padding: 8px;
             border: 1px solid #ddd;
+            border-radius: 4px;
         }
-
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
         th, td {
-            padding: 12px; /* Adjusted padding for better alignment */
+            border: 1px solid #ddd;
+            padding: 8px;
             text-align: left;
         }
-
         th {
             background-color: #f2f2f2;
         }
@@ -134,59 +94,67 @@
         <div onclick="showContainer('manage')">ĐẶT CHỖ</div>
         <div onclick="showContainer('checkin')">TRA CỨU CHUYẾN BAY, LỊCH BAY</div>
     </div>
+
+    <div class="overlay" id="overlay"></div>
+
     <!-- Đăng ký khách hàng -->
     <div class="container" id="booking-container">
+        <h2>Đăng ký khách hàng</h2>
         <div class="form-group">
             <label for="customer-id">Mã khách hàng</label>
-            <input type="text" id="customer-id" placeholder="">
+            <input type="text" id="customer-id" placeholder="Nhập mã khách hàng">
         </div>
         <div class="form-group">
             <label for="customer-name">Tên khách hàng</label>
-            <input type="text" id="customer-name" placeholder="">
+            <input type="text" id="customer-name" placeholder="Nhập tên khách hàng">
         </div>
         <div class="form-group">
             <label for="customer-address">Địa chỉ</label>
-            <input type="text" id="customer-address" placeholder="">
+            <input type="text" id="customer-address" placeholder="Nhập địa chỉ">
         </div>
         <div class="form-group">
             <label for="customer-phone">Số điện thoại</label>
-            <input type="tel" id="customer-phone" pattern="[0-9]{10}" placeholder="">
+            <input type="tel" id="customer-phone" pattern="[0-9]{10}" placeholder="Nhập số điện thoại">
         </div>
         <div class="form-group">
             <button style="width: 150px;">Đăng ký</button>
         </div>
     </div>
+
     <!-- ĐẶT CHỖ -->
     <div class="container" id="manage-container">
+        <h2>Đặt chỗ</h2>
         <div class="form-group">
             <label for="manage-customer-id">Mã khách hàng</label>
-            <input type="text" id="manage-customer-id" placeholder="">
+            <input type="text" id="manage-customer-id" placeholder="Nhập mã khách hàng">
         </div>
         <div class="form-group">
             <label for="manage-flight-id">Mã chuyến bay</label>
-            <input type="text" id="manage-flight-id" placeholder="">
+            <input type="text" id="manage-flight-id" placeholder="Nhập mã chuyến bay">
         </div>
         <div class="form-group">
             <label for="manage-departure-date">Ngày đi</label>
-            <input type="date" id="manage-departure-date" placeholder="">
+            <input type="date" id="manage-departure-date">
         </div>
         <div class="form-group">
             <button style="width: 150px;">Đặt chỗ</button>
         </div>
     </div>
+
     <!-- TRA CỨU CHUYẾN BAY, LỊCH BAY -->
     <div class="container" id="checkin-container">
+        <h2>Tra cứu chuyến bay, lịch bay</h2>
         <form action="/search" method="GET">
             <p>Tìm kiếm mã chuyến bay:</p>
             <input type="text" name="query" placeholder="Nhập từ khóa tìm kiếm..." required>
-            <button type="submit" style="background:#ffc107; border-style: none; color:#0a0a0a;  border-radius: 5px;  padding: 5px">Tìm kiếm</button>
+            <button type="submit" style="background:#ffc107; color:#0a0a0a;">Tìm kiếm</button>
         </form>
         <form action="/search" method="GET">
             <p>Tìm kiếm sân bay:</p>
             <input type="text" name="query" placeholder="Nhập từ khóa tìm kiếm..." required>
-            <button type="submit" style="background:#ffc107; border-style: none; color:#0e0d0d;  border-radius: 5px;  padding: 5px">Tìm kiếm</button>
+            <button type="submit" style="background:#ffc107; color:#0e0d0d;">Tìm kiếm</button>
         </form>
-        <table style="max-width:1000px">
+        <table>
             <tr>
                 <th>Mã chuyến bay</th>
                 <th>Số hiệu máy bay</th>
@@ -196,54 +164,42 @@
                 <th>Giờ đi</th>
                 <th>Giờ đến</th>
             </tr>
-            <!-- <tbody>
-                {% for row in flight_info %} -->
-                <tr>
-                    <td>{{ row.MaChuyenBay }}</td>
-                    <td>{{ row.SoHieuMayBay }}</td>
-                    <td>{{ row.MaLoaiMayBay }}</td>
-                    <td>{{ row.HangSanXuat }}</td>
-                    <td>{{ row.SanBayDi }}</td>
-                    <td>{{ row.GioDi }}</td>
-                    <td>{{ row.GioDen }}</td>
-                </tr>
-                <!-- {% endfor %}
-            </tbody> -->
+            <tr>
+                <td>{{ row.MaChuyenBay }}</td>
+                <td>{{ row.SoHieuMayBay }}</td>
+                <td>{{ row.MaLoaiMayBay }}</td>
+                <td>{{ row.HangSanXuat }}</td>
+                <td>{{ row.SanBayDi }}</td>
+                <td>{{ row.GioDi }}</td>
+                <td>{{ row.GioDen }}</td>
+            </tr>
         </table>
-        <!-- <section id="airport-info"> -->
-            <!-- Form để thêm loại máy bay mới -->
-            <!-- <form method="POST" action="{{ url_for('them_loai_mb') }}">
-                <label for="plane-type-id">Mã loại:</label>
-                <input type="text" id="plane-type-id" name="plane-type-id" value="{{ next_plane_type_id }}" readonly><br>
-                <label for="manufacturer">Hãng sản xuất:</label>
-                <input type="text" id="manufacturer" name="manufacturer" placeholder="Nhập tên hãng sản xuất" required><br>
-                <button type="submit">Thêm thông tin Loại máy bay</button>
-            </form>
-        </section> -->
     </div>
 
     <script>
         function showContainer(containerId) {
-            // Hide all containers
-            document.querySelectorAll('.container').forEach(container => container.classList.remove('active'));
+            var containers = document.querySelectorAll('.container');
+            var clickedContainer = document.getElementById(containerId + '-container');
+            var overlay = document.getElementById('overlay');
 
-            // Show the selected container
-            document.getElementById(`${containerId}-container`).classList.add('active');
+            // Hide all containers
+            containers.forEach(function(container) {
+                container.style.display = 'none';
+            });
+
+            // Show overlay and clicked container
+            overlay.style.display = 'block';
+            clickedContainer.style.display = 'block';
         }
-        function showContainer(containerId) {
-    const container = document.getElementById(`${containerId}-container`);
-    
-    // If the clicked container is already active, hide it
-    if (container.classList.contains('active')) {
-        container.classList.remove('active');
-    } else {
-        // Hide all containers
-        document.querySelectorAll('.container').forEach(c => c.classList.remove('active'));
-        
-        // Show the selected container
-        container.classList.add('active');
-    }
-}
+
+        // Close popup when clicking outside
+        document.getElementById('overlay').addEventListener('click', function() {
+            var containers = document.querySelectorAll('.container');
+            containers.forEach(function(container) {
+                container.style.display = 'none';
+            });
+            this.style.display = 'none';
+        });
     </script>
 </body>
 </html>
