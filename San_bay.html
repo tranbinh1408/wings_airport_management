@@ -158,6 +158,31 @@
         height: 100%;
         object-fit: cover;
     }
+    .slide1-container {
+        position: relative;
+    }
+    .dots {
+        text-align: center;
+        position: absolute;
+        bottom: 20px;
+        width: 100%;
+    }
+    .dot {
+        cursor: pointer;
+        height: 15px;
+        width: 15px;
+        margin: 0 5px;
+        background-color: #bbb;
+        border-radius: 50%;
+        display: inline-block;
+        transition: background-color 0.6s ease;
+    }
+    .dot.active, .dot:hover {
+        background-color: #717171;
+    }
+    .slide1 a {
+        cursor: pointer;
+    }
     .navbar {
             display: flex;
             justify-content: space-around;
@@ -412,7 +437,7 @@
     .dropdown-content {
         display: none;
         position: absolute;
-        background-color: rgba(241, 199, 14, 0.726);
+        background-color: rgba(250, 250, 251, 0.726);
         min-width: 160px;
         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
         z-index: 1;
@@ -428,7 +453,7 @@
 
     /* Thay đổi màu nền khi di chuột qua liên kết trong dropdown */
     .dropdown-content a:hover {
-        background-color: #f1f1f1;
+        background-color:  rgba(14, 164, 229, 0.726);
     }
 
     /* Hiển thị nội dung dropdown khi nút bấm được nhấn */
@@ -464,11 +489,6 @@
         text-decoration: none;
         display: block;
     } */
-
-
-    .dropdown-content a:hover {
-        background-color: #f1f1f1;
-    }
     .image-grid {
         width: 100%;
         display: flex;
@@ -830,21 +850,29 @@
     <div class="slide1-container">
         <div class="slide1-wrapper">
             <div class="slide1">
-                <img src="images/header1.jpg" alt="Hình Ảnh 1">
-              
+                <a href="https://www.vietnamairlines.com/vi-vn/v%C3%A9-m%C3%A1y-bay-t%E1%BB%AB-tp-h%E1%BB%93-ch%C3%AD-minh-%C4%91%E1%BA%BFn-perth" target="_blank">
+                    <img src="images/header1.jpg" alt="Hình Ảnh 1">
+                </a>
             </div>
             <div class="slide1">
-                <img src="images/header3.jpg" alt="Hình Ảnh 3">
+                <a href="https://www.vietnamairlines.com/vi-vn/v%C3%A9-m%C3%A1y-bay-t%E1%BB%AB-h%C3%A0-n%E1%BB%99i-%C4%91%E1%BA%BFn-siem-reap" target="_blank">
+                    <img src="images/header3.jpg" alt="Hình Ảnh 3">
+                </a>
             </div>
             <div class="slide1">
-                <img src="images/header4.jpg" alt="Hình Ảnh 4">
+                <a href="https://pages.vietnamairlines.com/uu-dai-thang" target="_blank">
+                    <img src="images/header4.jpg" alt="Hình Ảnh 4">
+                </a>
             </div>
             <div class="slide1">
-                <img src="images/header5.jpg" alt="Hình Ảnh 4">
+                <a href="https://www.vietnamairlines.com/vi-vn/uu-dai-sang-som-toi-muon-vietnam-airlines" target="_blank">
+                    <img src="images/header5.jpg" alt="Hình Ảnh 4">
+                </a>
             </div>
         </div>
         <div class="dots"></div>
     </div>
+    
     
     <!--  4 hình ảnh -->
     <script>
@@ -852,37 +880,40 @@
         let slides = document.querySelectorAll(".slide1");
         let slideWrapper = document.querySelector(".slide1-wrapper");
         let dotsContainer = document.querySelector(".dots");
-
-        function showSlides() {
-            slideIndex++;
-            if (slideIndex > slides.length) {
-                slideIndex = 1;
+    
+        function showSlides(n) {
+            slideIndex = n;
+            if (slideIndex > slides.length - 1) {
+                slideIndex = 0;
             }
-            slideWrapper.style.transform = `translateX(-${(slideIndex - 1) * 100}%)`;
-
-            // Xóa lớp "active" khỏi tất cả các điểm
+            if (slideIndex < 0) {
+                slideIndex = slides.length - 1;
+            }
+            slideWrapper.style.transform = `translateX(-${slideIndex * 100}%)`;
+    
+            // Update active dot
             let dots = dotsContainer.querySelectorAll(".dot");
-            dots.forEach(dot => dot.classList.remove("active"));
-
-            // Thêm lớp "active" vào điểm tương ứng
-            let currentDot = dotsContainer.querySelector(`.dot:nth-child(${slideIndex})`);
-            if (currentDot) {
-                currentDot.classList.add("active");
-            }
+            dots.forEach((dot, index) => {
+                dot.classList.toggle("active", index === slideIndex);
+            });
         }
-
+    
         function createDots() {
             for (let i = 0; i < slides.length; i++) {
                 let dot = document.createElement("span");
                 dot.classList.add("dot");
+                dot.addEventListener("click", () => showSlides(i));
                 dotsContainer.appendChild(dot);
             }
-            dotsContainer.querySelector(".dot:first-child").classList.add("active");
         }
-
+    
+        function nextSlide() {
+            showSlides(slideIndex + 1);
+        }
+    
         createDots();
-        showSlides();
-        setInterval(showSlides, 5000);
+        showSlides(0);
+        setInterval(nextSlide, 5000);
     </script>
   <!-- New Small Box Section -->
  
@@ -897,6 +928,14 @@
     <div class="form-group">
         <label for="customer-id">Mã khách hàng</label>
         <input type="text" id="customer-id" placeholder="">
+    </div>
+    <div class="form-group">
+        <label for="customer-phone">Số điện thoại</label>
+        <input type="tel" id="customer-phone" pattern="[0-9]{10}" placeholder="">
+    </div>
+    <div class="form-group">
+        <label for="customer-name">Họ đệm</label>
+        <input type="text" id="customer-name" placeholder="">
     </div>
     <div class="form-group">
         <label for="customer-name">Tên khách hàng</label>
@@ -937,12 +976,12 @@
     <form action="/search" method="GET">
         <p>Tìm kiếm mã chuyến bay:</p>
         <input type="text" name="query" placeholder="Nhập từ khóa tìm kiếm..." required>
-        <button type="submit" style="background:#ffc107; border-style: none; color:#0a0a0a;  border-radius: 5px;  padding: 5px">Tìm kiếm</button>
+        <button type="submit" style="background:#007BFF; border-style: none; color:hsl(0, 100%, 99%);  border-radius: 5px;  padding: 5px">Tìm kiếm</button>
     </form>
     <form action="/search" method="GET">
         <p>Tìm kiếm sân bay:</p>
         <input type="text" name="query" placeholder="Nhập từ khóa tìm kiếm..." required>
-        <button type="submit" style="background:#ffc107; border-style: none; color:#0e0d0d;  border-radius: 5px;  padding: 5px">Tìm kiếm</button>
+        <button type="submit" style="background:#007BFF; border-style: none; color:#ffffff;  border-radius: 5px;  padding: 5px">Tìm kiếm</button>
     </form>
     <table style="max-width:1000px">
         <tr>
