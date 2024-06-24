@@ -97,12 +97,86 @@
         background-color: #0c7de6;
         background: linear-gradient(90deg, rgba(58,123,213,1) 0%, rgba(0,210,255,1) 100%);
     }
-    
-    nav ul {
-        list-style: none;
-        display: flex;
-        gap: 30px;
+    .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
     }
+
+    .modal-content {
+        background-color: #ffffff;
+        margin: 15% auto;
+        padding: 25px;
+        border: 1px solid #080909;
+        width: 320px; /* Tăng chiều rộng từ 250px lên 320px */
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .close {
+        color: #0d0e0f;
+        float: right;
+        font-size: 24px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #0056b3;
+        text-decoration: none;
+    }
+
+    .modal-content h2 {
+        color: #007bff;
+        font-size: 20px; /* Tăng kích thước font chữ tiêu đề */
+        margin-bottom: 20px;
+    }
+
+    #country, #language {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #0f1114;
+        border-radius: 4px;
+        font-size: 15px;
+    }
+
+    #applyChoice {
+        width: 100%;
+        padding: 12px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+        align-items: center;
+        width: 150px;
+    }
+
+    #applyChoice:hover {
+        background-color: #0056b3;
+    }
+
+    label {
+        font-size: 15px;
+        color: #131518;
+        display: block;
+        margin-bottom: 8px;
+    }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
 
     nav ul li {
         display: inline;
@@ -825,11 +899,76 @@
                 <li><a href="#" id="helpLink">TRỢ GIÚP</a></li>
                 <li><a href="#">ĐĂNG NHẬP</a></li>
                 <li><a href="#" onclick="showContainer('booking')">ĐĂNG KÝ</a></li>
-                <li><a href="#">VIETNAM - TIẾNG VIỆT</a></li>
+                <li><a href="#" id="languageSelector">VIETNAM - TIẾNG VIỆT</a></li>
             </ul>
         </nav>
+        <div id="languageModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Lựa chọn Vùng và ngôn ngữ</h2>
+                <div>
+                    <label for="country">Quốc gia/Vùng:</label>
+                    <select id="country">
+                        <option value="vietnam">Vietnam</option>
+                        <option value="usa">USA</option>
+                        <option value="japan">Japan</option>
+                        <option value="japan">Laos</option>
+                        <option value="japan">Malaysia</option>
+                        <option value="japan">Myanmar</option>
+                        <option value="japan">Thailand</option>
+
+                        <!-- Thêm các quốc gia khác -->
+                    </select>
+                </div>
+                <div>
+                    <label for="language">Ngôn ngữ:</label>
+                    <select id="language">
+                        <option value="tieng-viet">Tiếng Việt</option>
+                        <option value="english">English</option>
+                        <!-- Thêm các ngôn ngữ khác -->
+                    </select>
+                </div>
+                <button id="applyChoice">LỰA CHỌN</button>
+            </div>
+        </div>
     </header>
     <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var modal = document.getElementById("languageModal");
+        var btn = document.getElementById("languageSelector");
+        var span = document.getElementsByClassName("close")[0];
+        var applyBtn = document.getElementById("applyChoice");
+
+        btn.onclick = function(e) {
+            e.preventDefault();
+            modal.style.display = "block";
+        }
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        applyBtn.onclick = function() {
+            var country = document.getElementById("country");
+            var language = document.getElementById("language");
+            var displayText = country.options[country.selectedIndex].text + " - " + 
+                            language.options[language.selectedIndex].text;
+            btn.textContent = displayText;
+            modal.style.display = "none";
+        }
+
+        // Giữ lại chức năng hiện có của bạn
+        document.getElementById("helpLink").onclick = function(event) {
+            event.preventDefault();
+            alert("Chào mừng bạn đến với Sân bay Trực tuyến!...");
+        }
+
         function showContainer(containerId) {
             document.querySelectorAll('.container').forEach(container => {
                 container.style.display = 'none';
@@ -837,13 +976,9 @@
             if (containerId === 'booking') {
                 document.getElementById('booking-container').style.display = 'block';
             }
-            // Add more conditions if you want to show different containers for other IDs
         }
+    });
 
-        document.getElementById("helpLink").onclick = function(event) {
-            event.preventDefault();
-            alert("Chào mừng bạn đến với Sân bay Trực tuyến!\n\n### Giới thiệu\nSân bay Trực tuyến là nền tảng giúp bạn quản lý và đặt vé máy bay một cách dễ dàng và thuận tiện. Hãy khám phá các tính năng và dịch vụ mà chúng tôi cung cấp để có một trải nghiệm đi bay tuyệt vời!\n\n### Các tính năng chính\n- Đặt chỗ và quản lý chuyến bay của bạn.\n- Xem thông tin chi tiết về lịch trình chuyến bay và sân bay.\n- Hỗ trợ trực tuyến để giải đáp mọi thắc mắc của bạn.\n- Thông tin chi tiết về các dịch vụ và tiện ích tại sân bay.\n\n### Các câu hỏi thường gặp (FAQ)\n**Làm thế nào để đặt vé máy bay?**\nĐể đặt vé máy bay trên Sân bay Trực tuyến, bạn có thể truy cập vào phần đặt chỗ và làm theo các bước hướng dẫn trên màn hình.\n\n**Tôi có thể thay đổi lịch trình chuyến bay như thế nào?**\nBạn có thể thay đổi lịch trình chuyến bay bằng cách truy cập vào phần quản lý chuyến bay và chọn chức năng sửa đổi lịch trình.\n\n### Liên hệ và Hỗ trợ\nNếu bạn cần thêm thông tin hoặc hỗ trợ, vui lòng liên hệ với chúng tôi qua email support@sanbaytructuyen.com hoặc gọi số hotline: 0123 456 789");
-        }
     </script>
 
     <!-- <h2 class="w3-center">Trình Chiếu Hình Ảnh</h2> -->
@@ -944,10 +1079,6 @@
     <div class="form-group">
         <label for="customer-address">Địa chỉ</label>
         <input type="text" id="customer-address" placeholder="">
-    </div>
-    <div class="form-group">
-        <label for="customer-phone">Số điện thoại</label>
-        <input type="tel" id="customer-phone" pattern="[0-9]{10}" placeholder="">
     </div>
     <div class="form-group">
         <button style="width: 150px;">Đăng ký</button>
