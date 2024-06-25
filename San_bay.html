@@ -387,6 +387,16 @@
         border-radius: 5px;
         z-index: 101;
     }
+
+    .container {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    }
+
+    .container.show {
+        opacity: 1;
+    }
+
     /* Tin tức */
     body {
         font-family: Arial, sans-serif;
@@ -537,12 +547,23 @@
     .image-container {
         opacity: 0;
         transform: translateY(20px);
-        transition: opacity 0.5s ease, transform 0.5s ease;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        overflow: hidden;
     }
-
+    .image-container:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
     .image-container.show {
         opacity: 1;
         transform: translateY(0);
+    }
+    .image-container img {
+        transition: transform 0.3s ease;
+    }
+
+    .image-container:hover img {
+        transform: scale(1.1);
     }
     .delete-button {
                 color: #ccc;
@@ -930,9 +951,10 @@
         
       </div>
     <header>
-        <div>
+        <div style="display: flex; align-items: center; ">
             <img class="logo" src="images/wings.png" alt="wings">
             <!-- <p style="color: #f0f0f0;">wings_airport_management</p> -->
+            <p style=" color: #fffbfb;">wings_airport_management</p>
         </div>
         <nav>
             <ul>
@@ -1006,7 +1028,7 @@
         // Giữ lại chức năng hiện có của bạn
         document.getElementById("helpLink").onclick = function(event) {
             event.preventDefault();
-            alert("Chào mừng bạn đến với Sân bay Trực tuyến!...");
+            alert("Chào mừng bạn đến với Sân bay Trực tuyến! <br> ### Giới thiệu Sân bay Trực tuyến là nền tảng giúp bạn quản lý và đặt vé máy bay một cách dễ dàng và thuận tiện. Hãy khám phá các tính năng và dịch vụ mà chúng tôi cung cấp để có một trải nghiệm đi bay tuyệt vời! ### Các tính năng chính- Đặt chỗ và quản lý chuyến bay của bạn. - Xem thông tin chi tiết về lịch trình chuyến bay và sân bay. - Hỗ trợ trực tuyến để giải đáp mọi thắc mắc của bạn.- Thông tin chi tiết về các dịch vụ và tiện ích tại sân bay. ### Các câu hỏi thường gặp (FAQ) **Làm thế nào để đặt vé máy bay?**Để đặt vé máy bay trên Sân bay Trực tuyến, bạn có thể truy cập vào phần đặt chỗ và làm theo các bước hướng dẫn trên màn hình.**Tôi có thể thay đổi lịch trình chuyến bay như thế nào?**Bạn có thể thay đổi lịch trình chuyến bay bằng cách truy cập vào phần quản lý chuyến bay và chọn chức năng sửa đổi lịch trình.### Liên hệ và Hỗ trợNếu bạn cần thêm thông tin hoặc hỗ trợ, vui lòng liên hệ với chúng tôi qua email support@sanbaytructuyen.com hoặc gọi số hotline: 0123 456 789");
         }
 
         function showContainer(containerId) {
@@ -1185,26 +1207,34 @@
         var containers = document.querySelectorAll('.container');
         var clickedContainer = document.getElementById(containerId + '-container');
         var overlay = document.getElementById('overlay1');
-
-        // Hide all containers
+    
+        // Ẩn tất cả các container ngay lập tức
         containers.forEach(function(container) {
+            container.style.opacity = '0';
             container.style.display = 'none';
         });
-
-        // Show overlay and clicked container
+    
+        // Hiển thị overlay và container được chọn
         overlay.style.display = 'block';
         clickedContainer.style.display = 'block';
+        
+        // Đặt opacity thành 1 sau một khoảng thời gian ngắn để kích hoạt transition
+        setTimeout(function() {
+            clickedContainer.style.opacity = '1';
+        }, 10);
     }
-
-    // Close popup when clicking outside
+    
+    // Đóng popup khi click bên ngoài
     document.getElementById('overlay1').addEventListener('click', function() {
         var containers = document.querySelectorAll('.container');
         containers.forEach(function(container) {
+            // Ẩn ngay lập tức, không có hiệu ứng fade out
             container.style.display = 'none';
+            container.style.opacity = '0';
         });
         this.style.display = 'none';
     });
-</script><br><br>
+    </script><br><br>
 <div class="services-container">
     <div class="horizontal">
         <div class="item">
@@ -1240,65 +1270,62 @@
         </div>
         <div class="notification-nav">
             <button onclick="prevNotification()">&#9664;</button>
-            <span id="notification-count">1/4</button>
+            <span id="notification-count">1/4</span>
             <button onclick="nextNotification()">&#9654;</button>
         </div>
         <div class="notification-more">
-            <a href="#" id="notification-more-link">Xem thêm</a>
+            <a href="https://www.vietnamairlines.com/vn/vi/vietnam-airlines/press-room/news" id="notification-more-link">Xem thêm</a>
         </div>
     </div>
-
+    
     <script>
         const notifications = [
-            { type: 'Tin tức', date: '10/06/2024', text: 'Thông báo quầy làm thủ tục từ Philippines về Việt Nam', link: '#' },
-            { type: 'Tin tức', date: '11/06/2024', text: 'Chuyến bay mới từ Hà Nội đi Đà Nẵng', link: '#' },
-            { type: 'Tin tức', date: '12/06/2024', text: 'Giảm giá vé máy bay mùa hè', link: '#' },
-            { type: 'Tin tức', date: '13/06/2024', text: 'Lịch bay mùa đông', link: '#' }
+            { type: 'Tin tức', date: '10/06/2024', text: 'Thông báo quầy làm thủ tục từ Philippines về Việt Nam', link: 'https://example.com/news1' },
+            { type: 'Tin tức', date: '11/06/2024', text: 'Chuyến bay mới từ Hà Nội đi Đà Nẵng', link: 'https://example.com/news2' },
+            { type: 'Tin tức', date: '12/06/2024', text: 'Giảm giá vé máy bay mùa hè', link: 'https://example.com/news3' },
+            { type: 'Tin tức', date: '13/06/2024', text: 'Lịch bay mùa đông', link: 'https://example.com/news4' }
         ];
         let currentNotificationIndex = 0;
         let intervalId;
-
+    
         function updateNotification() {
             const content = document.getElementById('notification-content');
             const count = document.getElementById('notification-count');
             const moreLink = document.getElementById('notification-more-link');
-
-            content.innerHTML = `<span class="notification-type">${notifications[currentNotificationIndex].type}</span>: <span>${notifications[currentNotificationIndex].date}</span> - <span>${notifications[currentNotificationIndex].text}</span>`;
-            count.innerText = `(${currentNotificationIndex + 1}/${notifications.length})`;
-            moreLink.href = notifications[currentNotificationIndex].link;
+            const currentNotification = notifications[currentNotificationIndex];
+    
+            content.innerHTML = `
+                <span class="notification-type">${currentNotification.type}</span>: 
+                <span>${currentNotification.date}</span> - 
+                <a href="${currentNotification.link}" style="text-decoration: none; color: inherit;">
+                    ${currentNotification.text}
+                </a>`;
+            count.innerText = `${currentNotificationIndex + 1}/${notifications.length}`;
+            moreLink.href = currentNotification.link;
         }
-
+    
         function prevNotification() {
-            if (currentNotificationIndex > 0) {
-                currentNotificationIndex--;
-            } else {
-                currentNotificationIndex = notifications.length - 1;
-            }
+            currentNotificationIndex = (currentNotificationIndex - 1 + notifications.length) % notifications.length;
             updateNotification();
         }
-
+    
         function nextNotification() {
-            if (currentNotificationIndex < notifications.length - 1) {
-                currentNotificationIndex++;
-            } else {
-                currentNotificationIndex = 0;
-            }
+            currentNotificationIndex = (currentNotificationIndex + 1) % notifications.length;
             updateNotification();
         }
-
+    
         function startAutoSlide() {
-            intervalId = setInterval(nextNotification, 5000); // Change notification every 5 seconds
+            intervalId = setInterval(nextNotification, 5000);
         }
-
+    
         function stopAutoSlide() {
             clearInterval(intervalId);
         }
-
+    
         document.addEventListener('DOMContentLoaded', () => {
             updateNotification();
             startAutoSlide();
-
-            // Optional: stop the auto-slide when user interacts with the buttons
+    
             const buttons = document.querySelectorAll('.notification-nav button');
             buttons.forEach(button => {
                 button.addEventListener('click', stopAutoSlide);
@@ -1332,48 +1359,48 @@
     <button style="margin-top: 1%;" id="view-more-btn" onclick="toggleAdditionalImages()">Xem thêm</button>
 
     <script>
-    const flightRoutes = [
-        { from: "Hà Nội", to: "Đà Nẵng", image: "images/danang1.jpg", link: "https://pixabay.com/vi/images/search/%C4%91%C3%A0%20n%E1%BA%B5ng/", price: "1,500,000 VND" },
-        { from: "Hà Nội", to: "Hạ Long", image: "images/halong1.jpg", link: "https://pixabay.com/vi/images/search/v%E1%BB%8Bnh%20h%E1%BA%A1%20long/", price: "800,000 VND" },
-        { from: "TP Hồ Chí Minh", to: "Đà Nẵng", image: "images/danang3.jpg", link: "https://pixabay.com/vi/images/search/%C4%91%C3%A0%20n%E1%BA%B5ng/", price: "1,200,000 VND" },
-        { from: "Hà Nội", to: "TP Hồ Chí Minh", image: "images/du-lich-sai-gon-1.webp", link: "https://www.pexels.com/vi-vn/tim-kiem/th%C3%A0nh%20ph%E1%BB%91%20h%E1%BB%93%20ch%C3%AD%20minh/", price: "1,800,000 VND" },
-        { from: "Hà Nội", to: "Sa Pa", image: "images/sapa.jpg", link: "https://pixabay.com/vi/images/search/sapa/", price: "1,000,000 VND" },
-        { from: "TP Hồ Chí Minh", to: "Ninh Bình", image: "images/ninhbinh.jpg", link: "https://pixabay.com/vi/images/search/ninh%20binh/", price: "1,600,000 VND" },
-        { from: "Hà Nội", to: "Hội An", image: "images/hoian.jpeg", link: "https://anhdephd.vn/hinh-anh-hoi-an/", price: "1,400,000 VND" },
-        { from: "TP Hồ Chí Minh", to: "Hà Nội", image: "images/dong-phong-nha.jpg", link: "https://www.pexels.com/vi-vn/tim-kiem/h%C3%A0%20n%E1%BB%99i/", price: "1,800,000 VND" },
-        { from: "Hà Nội", to: "Nha Trang", image: "images/nhatrang.jpg", link: "https://toigingiuvedep.vn/hinh-anh-nha-trang/", price: "1,700,000 VND" },
-        { from: "Huế", to: "Hà Nội", image: "images/hanoi1.jpg", link: "https://www.pexels.com/vi-vn/tim-kiem/h%C3%A0%20n%E1%BB%99i/", price: "1,500,000 VND" },
-        { from: "Hà Nội", to: "Quảng Bình", image: "images/dong-phong-nha.jpg", link: "https://top10quangbinh.vn/hinh-anh-quang-binh/", price: "1,300,000 VND" },
-        { from: "Đà Lạt", to: "TP Hồ Chí Minh", image: "images/hcm.jpg", link: "https://www.pexels.com/vi-vn/tim-kiem/th%C3%A0nh%20ph%E1%BB%91%20h%E1%BB%93%20ch%C3%AD%20minh/", price: "900,000 VND" }
-    ];
-
-    let showAllImages = false;
-
-    function populateDropdown() {
-        const dropdown = document.getElementById('dropdownContent1');
-        const uniqueRoutes = [...new Set(flightRoutes.map(route => `${route.from} đến ${route.to}`))];
+        const flightRoutes = [
+            { from: "Hà Nội", to: "Đà Nẵng", image: "images/danang1.jpg", link: "https://pixabay.com/vi/images/search/%C4%91%C3%A0%20n%E1%BA%B5ng/", price: "1,500,000 VND" },
+            { from: "Hà Nội", to: "Hạ Long", image: "images/halong1.jpg", link: "https://pixabay.com/vi/images/search/v%E1%BB%8Bnh%20h%E1%BA%A1%20long/", price: "800,000 VND" },
+            { from: "TP Hồ Chí Minh", to: "Đà Nẵng", image: "images/danang3.jpg", link: "https://pixabay.com/vi/images/search/%C4%91%C3%A0%20n%E1%BA%B5ng/", price: "1,200,000 VND" },
+            { from: "Hà Nội", to: "TP Hồ Chí Minh", image: "images/du-lich-sai-gon-1.webp", link: "https://www.pexels.com/vi-vn/tim-kiem/th%C3%A0nh%20ph%E1%BB%91%20h%E1%BB%93%20ch%C3%AD%20minh/", price: "1,800,000 VND" },
+            { from: "Hà Nội", to: "Sa Pa", image: "images/sapa.jpg", link: "https://pixabay.com/vi/images/search/sapa/", price: "1,000,000 VND" },
+            { from: "TP Hồ Chí Minh", to: "Ninh Bình", image: "images/ninhbinh.jpg", link: "https://pixabay.com/vi/images/search/ninh%20binh/", price: "1,600,000 VND" },
+            { from: "Hà Nội", to: "Hội An", image: "images/hoian.jpeg", link: "https://anhdephd.vn/hinh-anh-hoi-an/", price: "1,400,000 VND" },
+            { from: "TP Hồ Chí Minh", to: "Hà Nội", image: "images/dong-phong-nha.jpg", link: "https://www.pexels.com/vi-vn/tim-kiem/h%C3%A0%20n%E1%BB%99i/", price: "1,800,000 VND" },
+            { from: "Hà Nội", to: "Nha Trang", image: "images/nhatrang.jpg", link: "https://toigingiuvedep.vn/hinh-anh-nha-trang/", price: "1,700,000 VND" },
+            { from: "Huế", to: "Hà Nội", image: "images/hanoi1.jpg", link: "https://www.pexels.com/vi-vn/tim-kiem/h%C3%A0%20n%E1%BB%99i/", price: "1,500,000 VND" },
+            { from: "Hà Nội", to: "Quảng Bình", image: "images/dong-phong-nha.jpg", link: "https://top10quangbinh.vn/hinh-anh-quang-binh/", price: "1,300,000 VND" },
+            { from: "Đà Lạt", to: "TP Hồ Chí Minh", image: "images/hcm.jpg", link: "https://www.pexels.com/vi-vn/tim-kiem/th%C3%A0nh%20ph%E1%BB%91%20h%E1%BB%93%20ch%C3%AD%20minh/", price: "900,000 VND" }
+        ];
         
-        uniqueRoutes.forEach(route => {
-            const a = document.createElement('a');
-            a.href = '#';
-            a.textContent = route;
-            a.onclick = (event) => {
-                event.preventDefault();
-                filterImages(route);
-            };
-            dropdown.appendChild(a);
-        });
-    }
-
-    function filterImages(selectedRoute) {
-        const rows = [document.getElementById('row1'), document.getElementById('row2'), document.getElementById('row3')];
-        rows.forEach(row => row.innerHTML = '');
+        let showAllImages = false;
         
-        const filteredRoutes = flightRoutes.filter(route => `${route.from} đến ${route.to}` === selectedRoute);
-        displayImages(filteredRoutes);
-    }
-
-    function displayImages(routes) {
+        function populateDropdown() {
+            const dropdown = document.getElementById('dropdownContent1');
+            const uniqueRoutes = [...new Set(flightRoutes.map(route => `${route.from} đến ${route.to}`))];
+            
+            uniqueRoutes.forEach(route => {
+                const a = document.createElement('a');
+                a.href = '#';
+                a.textContent = route;
+                a.onclick = (event) => {
+                    event.preventDefault();
+                    filterImages(route);
+                };
+                dropdown.appendChild(a);
+            });
+        }
+        
+        function filterImages(selectedRoute) {
+            const rows = [document.getElementById('row1'), document.getElementById('row2'), document.getElementById('row3')];
+            rows.forEach(row => row.innerHTML = '');
+            
+            const filteredRoutes = flightRoutes.filter(route => `${route.from} đến ${route.to}` === selectedRoute);
+            displayImages(filteredRoutes);
+        }
+        
+        function displayImages(routes) {
         const rows = [document.getElementById('row1'), document.getElementById('row2'), document.getElementById('row3')];
         rows.forEach(row => {
             row.innerHTML = '';
@@ -1406,56 +1433,55 @@
             }, 50 * i);
         }
     }
-
-    function toggleAdditionalImages() {
-        showAllImages = !showAllImages;
-        displayImages(flightRoutes);
-        document.getElementById('view-more-btn').textContent = showAllImages ? "Thu gọn" : "Xem thêm";
-    }
-
-    function toggleDropdown(event, id) {
-        event.preventDefault();
-        document.getElementById(id).classList.toggle("show");
-    }
-
-    function filterByBudget(event, budgetLevel) {
-        event.preventDefault();
-        let filteredRoutes;
-        switch (budgetLevel) {
-            case 'low':
-                filteredRoutes = flightRoutes.filter(route => parseInt(route.price.replace(/[^0-9]/g, '')) < 1000000);
-                break;
-            case 'medium':
-                filteredRoutes = flightRoutes.filter(route => {
-                    const price = parseInt(route.price.replace(/[^0-9]/g, ''));
-                    return price >= 1000000 && price <= 1500000;
-                });
-                break;
-            case 'high':
-                filteredRoutes = flightRoutes.filter(route => parseInt(route.price.replace(/[^0-9]/g, '')) > 1500000);
-                break;
-            default:
-                filteredRoutes = flightRoutes;
+        function toggleAdditionalImages() {
+            showAllImages = !showAllImages;
+            displayImages(flightRoutes);
+            document.getElementById('view-more-btn').textContent = showAllImages ? "Thu gọn" : "Xem thêm";
         }
-        displayImages(filteredRoutes);
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-        populateDropdown();
-        displayImages(flightRoutes);
-    });
-
-    window.onclick = function(event) {
-        if (!event.target.matches('.dropdown a')) {
-            var dropdowns = document.getElementsByClassName("dropdown-content");
-            for (var i = 0; i < dropdowns.length; i++) {
-                var openDropdown = dropdowns[i];
-                if (openDropdown.classList.contains('show')) {
-                    openDropdown.classList.remove('show');
+        
+        function toggleDropdown(event, id) {
+            event.preventDefault();
+            document.getElementById(id).classList.toggle("show");
+        }
+        
+        function filterByBudget(event, budgetLevel) {
+            event.preventDefault();
+            let filteredRoutes;
+            switch (budgetLevel) {
+                case 'low':
+                    filteredRoutes = flightRoutes.filter(route => parseInt(route.price.replace(/[^0-9]/g, '')) < 1000000);
+                    break;
+                case 'medium':
+                    filteredRoutes = flightRoutes.filter(route => {
+                        const price = parseInt(route.price.replace(/[^0-9]/g, ''));
+                        return price >= 1000000 && price <= 1500000;
+                    });
+                    break;
+                case 'high':
+                    filteredRoutes = flightRoutes.filter(route => parseInt(route.price.replace(/[^0-9]/g, '')) > 1500000);
+                    break;
+                default:
+                    filteredRoutes = flightRoutes;
+            }
+            displayImages(filteredRoutes);
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            populateDropdown();
+            displayImages(flightRoutes);
+        });
+        
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropdown a')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
                 }
             }
         }
-    }
     </script>
 
     <br><div class="dropdown-note" style="text-align: center; font-size: 11px;">*Giá vé hiển thị được thu thập trong vòng 48 giờ và có thể không còn hiệu lực tại thời điểm đặt chỗ. Chúng tôi có thể thu thêm phí và lệ phí cho một số sản phẩm và dịch vụ.</div>
@@ -1714,6 +1740,12 @@
                 <a href="#" onclick="showAlert('Thông tin quảng cáo với Wings Airports')">Quảng Cáo Với Wings Airports</a>
             </div>
         </div>
+        <script>
+            function showAlert(message) {
+                alert(message);
+            }
+        </script>
+          
         <div class="footer-container">
             <div class="footer-column">
                 <a href="link1.html">
@@ -1729,7 +1761,7 @@
                 <img src="images/icon-instagram.png" alt="Image 1" width="30px">
 
                 <a href="https://www.vietnamairlines.com/vn/vi/sitemap">
-                <p>Đại Lý| Sơ đồ website</p>
+                <p>Đại Lý| Sơ đồ website</p></a>
             </div>
             <div class="footer-column">
                 <div class="contact-info">
@@ -1752,12 +1784,12 @@
                 <img src="images/img-logo-partner-1.png" alt="Image 1"  width="100px"> 
                 <img src="images/img-logo-partner-2.png" alt="Image 1"  width="30px"> 
                 <img src="images/img-logo-partner-3.png" alt="Image 1"  width="30px"> 
-                <a href="https://www.vietnamairlines.com/vn/vi/our-awards">
-                <p>Giải thưởng</p>              
+                <a style="text-decoration: none;" href="https://www.vietnamairlines.com/vn/vi/our-awards">
+                <p>Giải thưởng</p></a>              
             </div>
         </div>
         <hr>
-        <pre class="footer-info" >© 2019 Vietnam Airlines JSC
+        <pre class="footer-info" style="font-family: Arial;" >© 2019 Vietnam Airlines JSC
             Tổng công ty Hàng không Việt Nam - CTCP. Số 200 Nguyễn Sơn, P.Bồ Đề, Q.Long Biên, Hà Nội.
             Điện thoại: (+84-24) 38272289. Fax: (+84-24) 38722375.
             Giấy chứng nhận đăng ký doanh nghiệp, mã số doanh nghiệp: 0100107518, đăng ký lần đầu ngày 30/6/2010, đăng ký thay đổi lần thứ 9 ngày 12/01/2022, cấp bởi Sở KHĐT thành phố Hà Nội.</pre>
