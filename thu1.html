@@ -3,203 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hệ thống Đặt vé Máy bay</title>
+    <title>Vietnam Airlines Contact Information</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        .navbar {
-            background-color: #f1f1f1;
-            overflow: hidden;
-        }
-        .navbar div {
-            float: left;
-            display: block;
-            color: black;
+            background-color: #006494;
+            color: white;
             text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-            cursor: pointer;
-        }
-        .navbar div:hover {
-            background-color: #ddd;
-        }
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.5);
-            z-index: 100;
+            padding: 20px;
         }
         .container {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: white;
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #024873;
             padding: 20px;
-            border-radius: 5px;
-            z-index: 101;
-            max-width: 80%;
-            max-height: 80%;
-            overflow-y: auto;
+            border-radius: 10px;
         }
-        .form-group {
-            margin-bottom: 15px;
+        .logo, .contact, .social, .awards, .footer {
+            margin-bottom: 20px;
         }
-        label {
-            display: block;
-            margin-bottom: 5px;
+        .contact div, .social div, .awards div {
+            margin: 10px 0;
         }
-        input[type="text"], input[type="tel"], input[type="date"] {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+        .footer {
+            font-size: 0.8em;
         }
-        button {
-            background-color: #4CAF50;
+        .three-column {
+            display: flex;
+            justify-content: space-around;
+            width: 80%;
+            margin: 0 auto;
+            margin-bottom: 20px;
+        }
+        .column {
+            flex: 1;
+            padding: 10px;
+        }
+        a {
             color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
+            text-decoration: none;
         }
     </style>
 </head>
 <body>
-    <div class="navbar">
-        <div onclick="showContainer('booking')">ĐĂNG KÝ KHÁCH HÀNG</div>
-        <div onclick="showContainer('manage')">ĐẶT CHỖ</div>
-        <div onclick="showContainer('checkin')">TRA CỨU CHUYẾN BAY, LỊCH BAY</div>
-    </div>
-
-    <div class="overlay" id="overlay"></div>
-
-    <!-- Đăng ký khách hàng -->
-    <div class="container" id="booking-container">
-        <h2>Đăng ký khách hàng</h2>
-        <div class="form-group">
-            <label for="customer-id">Mã khách hàng</label>
-            <input type="text" id="customer-id" placeholder="Nhập mã khách hàng">
+    <div class="container">
+        <div class="logo">
+            <img src="path_to_skyteam_logo" alt="SkyTeam" />
         </div>
-        <div class="form-group">
-            <label for="customer-name">Tên khách hàng</label>
-            <input type="text" id="customer-name" placeholder="Nhập tên khách hàng">
+        <div class="contact">
+            <div><strong>Trung tâm chăm sóc khách hàng Việt Nam (24/7):</strong> 1900 1100</div>
+            <div><strong>Trung tâm chăm sóc Hội viên Bông Sen Vàng (24/7):</strong> 1900 1800</div>
+            <div><strong>Email:</strong> <a href="mailto:Telesales@vietnamairlines.com">Telesales@vietnamairlines.com</a></div>
         </div>
-        <div class="form-group">
-            <label for="customer-address">Địa chỉ</label>
-            <input type="text" id="customer-address" placeholder="Nhập địa chỉ">
+        <div class="social">
+            <div>
+                <a href="facebook_link"><img src="path_to_facebook_icon" alt="Facebook" /></a>
+                <a href="youtube_link"><img src="path_to_youtube_icon" alt="YouTube" /></a>
+                <a href="instagram_link"><img src="path_to_instagram_icon" alt="Instagram" /></a>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="customer-phone">Số điện thoại</label>
-            <input type="tel" id="customer-phone" pattern="[0-9]{10}" placeholder="Nhập số điện thoại">
+        <div class="three-column">
+            <div class="column">
+                <img src="path_to_vietnam_airlines_logo" alt="Vietnam Airlines" />
+            </div>
+            <div class="column">
+                <img src="path_to_pacific_airlines_logo" alt="Pacific Airlines" />
+            </div>
+            <div class="column">
+                <img src="path_to_vasco_logo" alt="VASCO" />
+            </div>
         </div>
-        <div class="form-group">
-            <button style="width: 150px;">Đăng ký</button>
+        <div class="awards">
+            <div>
+                <img src="path_to_world_travel_awards_logo" alt="World Travel Awards" />
+                <img src="path_to_tripadvisor_award_logo" alt="TripAdvisor" />
+            </div>
         </div>
-    </div>
-
-    <!-- ĐẶT CHỖ -->
-    <div class="container" id="manage-container">
-        <h2>Đặt chỗ</h2>
-        <div class="form-group">
-            <label for="manage-customer-id">Mã khách hàng</label>
-            <input type="text" id="manage-customer-id" placeholder="Nhập mã khách hàng">
-        </div>
-        <div class="form-group">
-            <label for="manage-flight-id">Mã chuyến bay</label>
-            <input type="text" id="manage-flight-id" placeholder="Nhập mã chuyến bay">
-        </div>
-        <div class="form-group">
-            <label for="manage-departure-date">Ngày đi</label>
-            <input type="date" id="manage-departure-date">
-        </div>
-        <div class="form-group">
-            <button style="width: 150px;">Đặt chỗ</button>
+        <div class="footer">
+            <div>© 2019 Vietnam Airlines JSC</div>
+            <div>Tổng công ty Hàng không Việt Nam - CTCP. Số 200 Nguyễn Sơn, P.Bồ Đề, Q.Long Biên, Hà Nội.</div>
+            <div>Điện thoại: (+84-24) 38272289. Fax: (+84-24) 38722375.</div>
+            <div>Giấy chứng nhận đăng ký doanh nghiệp, mã số doanh nghiệp: 0100107518, đăng ký lần đầu ngày 30/6/2010, đăng ký thay đổi lần thứ 9 ngày 12/01/2022, cấp bởi Sở KHĐT thành phố Hà Nội.</div>
+            <div>
+                <img src="path_to_bocongthuong_logo" alt="Bộ Công Thương" />
+                <img src="path_to_pci_dss_logo" alt="PCI-DSS" />
+            </div>
         </div>
     </div>
-
-    <!-- TRA CỨU CHUYẾN BAY, LỊCH BAY -->
-    <div class="container" id="checkin-container">
-        <h2>Tra cứu chuyến bay, lịch bay</h2>
-        <form action="/search" method="GET">
-            <p>Tìm kiếm mã chuyến bay:</p>
-            <input type="text" name="query" placeholder="Nhập từ khóa tìm kiếm..." required>
-            <button type="submit" style="background:#ffc107; color:#0a0a0a;">Tìm kiếm</button>
-        </form>
-        <form action="/search" method="GET">
-            <p>Tìm kiếm sân bay:</p>
-            <input type="text" name="query" placeholder="Nhập từ khóa tìm kiếm..." required>
-            <button type="submit" style="background:#ffc107; color:#0e0d0d;">Tìm kiếm</button>
-        </form>
-        <table>
-            <tr>
-                <th>Mã chuyến bay</th>
-                <th>Số hiệu máy bay</th>
-                <th>Mã loại máy bay</th>
-                <th>Hãng sản xuất</th>
-                <th>Sân bay đi</th>
-                <th>Giờ đi</th>
-                <th>Giờ đến</th>
-            </tr>
-            <tr>
-                <td>{{ row.MaChuyenBay }}</td>
-                <td>{{ row.SoHieuMayBay }}</td>
-                <td>{{ row.MaLoaiMayBay }}</td>
-                <td>{{ row.HangSanXuat }}</td>
-                <td>{{ row.SanBayDi }}</td>
-                <td>{{ row.GioDi }}</td>
-                <td>{{ row.GioDen }}</td>
-            </tr>
-        </table>
-    </div>
-
-    <script>
-        function showContainer(containerId) {
-            var containers = document.querySelectorAll('.container');
-            var clickedContainer = document.getElementById(containerId + '-container');
-            var overlay = document.getElementById('overlay');
-
-            // Hide all containers
-            containers.forEach(function(container) {
-                container.style.display = 'none';
-            });
-
-            // Show overlay and clicked container
-            overlay.style.display = 'block';
-            clickedContainer.style.display = 'block';
-        }
-
-        // Close popup when clicking outside
-        document.getElementById('overlay').addEventListener('click', function() {
-            var containers = document.querySelectorAll('.container');
-            containers.forEach(function(container) {
-                container.style.display = 'none';
-            });
-            this.style.display = 'none';
-        });
-    </script>
 </body>
 </html>

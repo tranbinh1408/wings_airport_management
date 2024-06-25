@@ -588,12 +588,12 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-}
+    }
 
-.image-container .price {
-    font-weight: bold;
-    margin-top: 5px;
-}
+    .image-container .price {
+        font-weight: bold;
+        margin-top: 5px;
+    }
 
     .row {
         display: flex;
@@ -881,6 +881,46 @@
             margin-bottom: 20px;
         }
     }
+    .contact-info {
+    text-align: left;
+    margin-bottom: 10px;
+
+    }
+
+    .contact-line {
+        display: flex;
+        align-items: center;
+        margin-bottom: 5px;
+        white-space: nowrap;
+    }
+
+    .contact-line img {
+        margin-right: 10px;
+    }
+
+    .contact-line span {
+        font-size: 15px;
+
+    }
+    .footer-info {
+    font-size: 15px;
+    line-height: 1.4;
+    color: white;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    text-align: center;
+    padding: 10px 5%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+    @media (max-width: 768px) {
+        .footer-info {
+            font-size: 15px;
+            padding: 8px 3%;
+        }
+    }
+    
 </style>
 <body>
     <div id="preloader">
@@ -1676,18 +1716,56 @@
         </div>
         <div class="footer-container">
             <div class="footer-column">
-                <p>SKYTEAM</p>
-                <a href="#" onclick="showAlert('Thông tin hợp tác với chương trình')">Hợp Tác Với Chương Trình</a>
+                <a href="link1.html">
+                <img src="images/skyteam_logo_ft.webp" alt="Image 1" width="150px">
 
+                <a href="https://www.facebook.com/VietnamAirlines">
+                <img src="images/icon-facebook.png" alt="Image 1" width="30px">
+
+                <a href="https://www.youtube.com/user/vietnamairlinescorp">
+                <img src="images/icon_youtube.png" alt="Image 1" width="30px">
+
+                <a href="https://www.instagram.com/vietnamairlines/">                  
+                <img src="images/icon-instagram.png" alt="Image 1" width="30px">
+
+                <a href="https://www.vietnamairlines.com/vn/vi/sitemap">
+                <p>Đại Lý| Sơ đồ website</p>
+            </div>
+            <div class="footer-column">
+                <div class="contact-info">
+                    <div class="contact-line">
+                        <img src="images/icondt.webp" alt="Phone Icon" width="20px">
+                        <span>Trung tâm chăm sóc khách hàng Việt Nam (24/7): 1900 1100</span>
+                    </div>
+                    <div class="contact-line">
+                        <img src="images/icondt.webp" alt="Phone Icon" width="20px">
+                        <span>Trung tâm chăm sóc Hội viên Bông Sen Vàng (24/7): 1900 1800</span>
+                    </div>
+                    <div class="contact-line">
+                        <img src="images/iconemail.png" alt="Email Icon" width="20px">
+                        <span>Email: Telesales@wingsairlines.com</span>
+                    </div>
+                </div>
+                <img src="images/logo-footer-small-2.png" alt="Logo" width="300px">
+            </div>
+            <div class="footer-column">
+                <img src="images/img-logo-partner-1.png" alt="Image 1"  width="100px"> 
+                <img src="images/img-logo-partner-2.png" alt="Image 1"  width="30px"> 
+                <img src="images/img-logo-partner-3.png" alt="Image 1"  width="30px"> 
+                <a href="https://www.vietnamairlines.com/vn/vi/our-awards">
+                <p>Giải thưởng</p>              
             </div>
         </div>
+        <hr>
+        <pre class="footer-info" >© 2019 Vietnam Airlines JSC
+            Tổng công ty Hàng không Việt Nam - CTCP. Số 200 Nguyễn Sơn, P.Bồ Đề, Q.Long Biên, Hà Nội.
+            Điện thoại: (+84-24) 38272289. Fax: (+84-24) 38722375.
+            Giấy chứng nhận đăng ký doanh nghiệp, mã số doanh nghiệp: 0100107518, đăng ký lần đầu ngày 30/6/2010, đăng ký thay đổi lần thứ 9 ngày 12/01/2022, cấp bởi Sở KHĐT thành phố Hà Nội.</pre>
+        <div class="footer-column">
+            <img src="images/dathongbao.webp" alt="Image 1"  width="100px"> 
+            <img src="images/dadangky.webp" alt="Image 1"  width="100px"> 
+            <img src="images/PCI_DSS_CERTIFIED-38.webp" alt="Image 1"  width="80px">            
+        </div>
     </footer>
-    
-    <script>
-    function showAlert(message) {
-        alert(message);
-    }
-    </script>
-  
 </body>
 </html>
